@@ -26,26 +26,25 @@
                     </div>     
 
                     <div style="padding-top:30px" class="panel-body" >
-
-                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
-                        <form id="loginform" class="form-horizontal" role="form">
+                        <form method="post" id="login_form" class="form-horizontal" role="form">
                                     
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">                                        
-                                    </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="login-email" type="text" class="form-control" name="username" value="" placeholder="email" required/>     
+                            </div>
+                            <p id="login_email_error" style="display:none;" class="text-danger">Please enter valid email address<p>
                                 
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
-                                    </div>
-                                    
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required>
+                            </div>
+                            <p id="login_password_error" style="display:none;" class="text-danger">Password length should be more than 5 <p>        
 
 
                                 <div style="margin-top:10px" class="form-group">
                                     <div class="col-sm-12 controls">
-                                      <a id="btn-login" href="#" class="btn btn-success"> <i class="fa fa-sign-in"></i>  &nbsp; Login  </a>
+                                      <button id="btn-login" href="#" class="btn btn-success"> <i class="fa fa-sign-in"></i>  &nbsp; Login  </button>
                                     </div>
                                 </div>
 
@@ -61,9 +60,6 @@
                                     </div>
                                 </div>    
                             </form>     
-
-
-
                         </div>                     
                     </div>  
         </div>
@@ -74,27 +70,30 @@
                             <div style="float:right; font-size: 85%; position: relative; top:-17px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
                         </div>  
                         <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" role="form">
+                            <form method="post" id="signupform" class="form-horizontal" role="form">
                                 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
                                     <span></span>
                                 </div>
                                     
-                               	 <div style="margin-bottom: 25px" class="input-group">
+                               	 <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                        <input id="signup-email" type="text" class="form-control" name="email" placeholder="email">
+                                        <input id="signup-email" type="text" class="form-control" name="email" placeholder="email" required/>
                                     </div>
+                                    <p id="signup_email_error" style="display:none;" class="text-danger">Please enter valid email address<p>
                                     
-                                     <div style="margin-bottom: 25px" class="input-group">
+                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                        <input id="signup-fullname" type="text" class="form-control" name="name" placeholder="full name">
+                                        <input id="signup-fullname" type="text" class="form-control" name="name" placeholder="full name" required/>
                                     </div>
+                                    <p id="signup_fullname_error" style="display:none;" class="text-danger">Full name length should be more than 5 <p>
                                     
-                                <div style="margin-bottom: 25px" class="input-group">
+                                <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input id="signup-password" type="password" class="form-control" name="password" placeholder="password">
+                                    <input id="signup-password" type="password" class="form-control" name="password" placeholder="password" required/>
                                 </div>
+                                <p id="signup_password_error" style="display:none;" class="text-danger">Password length should be more than 5 <p>
                                 
                                 <div class="form-group">
                                     <div class="col-md-4">
@@ -103,11 +102,7 @@
                                 </div>
                             </form>
                          </div>
-                    </div>
-
-               
-               
-                
+                    </div>        
          </div> 
     </div>
     
@@ -116,7 +111,75 @@
 	
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-		<script src="https://use.fontawesome.com/7abae0511a.js"></script>
+     	<script src="https://use.fontawesome.com/7abae0511a.js"></script>
+       
+        <script type="text/javascript">
+            function check_email(email) {
+                var pattern = new RegExp("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+                var result = pattern .test(email);
+                return result;
+            }
 
+            function check_length(password, length) {
+                if(password.length >= length) {
+                    return true;
+                }
+                return false;
+            }
+
+            $(document).ready(function() {
+                $('#login_email_error').hide();
+                $('#login_password_error').hide();
+
+                $('#btn-login').click(function(e) {
+                    var email = $('#login-email').val(); 
+                    var password = $('#login-password').val();
+                    var email_result = check_email(email);
+                    var password_result = check_length(password, 5);
+
+                    if(!email_result) {
+                        $('#login_email_error').show();
+                        e.preventDefault();
+                    }
+                    if(!password_result) {
+                        $('#login_password_error').show();
+                        e.preventDefault();
+                    }
+
+                    return email_result && password_result;
+                });
+
+                $('#btn-signup').click(function(e){
+                    var email = $('#signup-email').val(); 
+                    var password = $('#signup-password').val();
+                    var fullname = $('#signup-fullname').val();
+
+                    var email_result =  check_email(email);
+                    var password_result = check_length(password, 5);
+                    var fullname_result = check_length(name, 5);
+
+                    if(!email_result) {
+                        $('#signup_email_error').show();
+                        e.preventDefault();
+                    }
+                    if(!password_result) {
+                        $('#signup_password_error').show();
+                        e.preventDefault();
+                    }
+                    if(!fullname_result) {
+                        $('#signup_fullname_error').show();
+                        e.preventDefault();
+                    }
+
+                    return email_result && fullname_result && password_result;
+
+
+                });
+
+            });
+        </script>
+
+     
+     
 	</body>
 </html>
