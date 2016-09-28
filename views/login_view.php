@@ -1,21 +1,24 @@
-<html>
-	<head>
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<?php include('header.php');?>
+
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
 
         <style>
             body {
-                background: url('images/login_background.jpg');
+                background: url('../images/login_background.jpg');
                 background-size: cover;
                 opacity: 0.95;
             }
+
+            .input-group {
+                margin-bottom: 15px;
+            }
+
+            .text-danger{
+                margin-bottom: 20px;
+            }
+
         </style>
 
-	</head>
-
-
-	<body>
 
     <div class="container">    
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
@@ -26,12 +29,18 @@
                     </div>     
 
                     <div style="padding-top:30px" class="panel-body" >
-                            
-                        <form method="post" id="login_form" class="form-horizontal" role="form">
+                        
+                        <?php if(isset($_GET['error_login'])) {
+                            echo '<div class="alert alert-danger">
+                                    Invaid username or password !
+                                </div>';
+                        }?>
+
+                        <form action="../actions/login.php" method="post" id="login_form" class="form-horizontal" role="form">
                                     
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="login-email" type="text" class="form-control" name="username" value="" placeholder="email" required/>     
+                                <input id="login-email" type="text" class="form-control" name="email" value="" placeholder="email" required/>     
                             </div>
                             <p id="login_email_error" style="display:none;" class="text-danger">Please enter valid email address<p>
                                 
@@ -108,26 +117,14 @@
     
 
 
-	
-		<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-     	<script src="https://use.fontawesome.com/7abae0511a.js"></script>
+	    <?php include('script_files');?>
        
         <script type="text/javascript">
-            function check_email(email) {
-                var pattern = new RegExp("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-                var result = pattern .test(email);
-                return result;
-            }
-
-            function check_length(password, length) {
-                if(password.length >= length) {
-                    return true;
-                }
-                return false;
-            }
 
             $(document).ready(function() {
+
+                $('.alert').fadeOut(1500);
+
                 $('#login_email_error').hide();
                 $('#login_password_error').hide();
 
@@ -135,14 +132,15 @@
                     var email = $('#login-email').val(); 
                     var password = $('#login-password').val();
                     var email_result = check_email(email);
-                    var password_result = check_length(password, 5);
+                    var password_result = check_length($('#login-password'), 5, 'Password length should be more than 5');
 
                     if(!email_result) {
-                        $('#login_email_error').show();
+                        $('#login_email_error').show().fadeOut(3000);
                         e.preventDefault();
                     }
+                                     
                     if(!password_result) {
-                        $('#login_password_error').show();
+                        $('#login_password_error').show().fadeOut(3000);
                         e.preventDefault();
                     }
 
@@ -159,15 +157,15 @@
                     var fullname_result = check_length(name, 5);
 
                     if(!email_result) {
-                        $('#signup_email_error').show();
+                        $('#signup_email_error').show().fadeOut(3000);
                         e.preventDefault();
                     }
                     if(!password_result) {
-                        $('#signup_password_error').show();
+                        $('#signup_password_error').show().fadeOut(3000);
                         e.preventDefault();
                     }
                     if(!fullname_result) {
-                        $('#signup_fullname_error').show();
+                        $('#signup_fullname_error').show().fadeOut(3000);
                         e.preventDefault();
                     }
 
@@ -180,6 +178,4 @@
         </script>
 
      
-     
-	</body>
-</html>
+     <?php include('footer.php'); ?>
