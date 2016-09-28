@@ -18,6 +18,7 @@
 		$tags = $row['tags'];
 		$views = $row['views'];
 		$email = $row['email'];
+		$likes_count = $row['likes_count'];
 		$created_at = date('d-M-Y', strtotime($row['created_at']));
 		$tags = explode(',', $tags);
 	}

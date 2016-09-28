@@ -12,12 +12,13 @@
 					<div style="margin-bottom:30px;" class="row">
 						<div class="col-md-1 text-center">
 							<i class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>
-							<p class="help-block likes_count"> 100 </p>
+							<p class="help-block likes_count"> <?php echo $likes_count; ?> </p>
 							<i class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i> <br/> </br>
 							<i class="fa fa-star fa-2x favourite" aria-hidden="true"></i>
 						</div>
 						<div class="col-md-10">
-							<p class="content">	
+							<p style="display:none;" class="alert alert-warning message"></p>
+							<p class="content">
 								<?php echo $question; ?>
 							</p>	
 							<p>
@@ -64,7 +65,7 @@
 									<i class="fa fa-check fa-2x correct" aria-hidden="true"></i>
 							</div>
 							<div class="col-md-10">
-								<p><?php echo $answer['answer']; ?></p>
+                            	<p><?php echo $answer['answer']; ?></p>
 								<p>
 									<span>
 										<a href="#"> <i style="color:black;" class="fa fa-user" aria-hidden="true"></i> <?php echo $answer['email'] ;?> </a>
@@ -131,6 +132,15 @@
 
 				$('.ans_success').hide();
 
+				$.get('../actions/get/get_like_details.php', {'ques_id': "<?php echo $_GET['ques_id']; ?>"}, function(response) {
+					if(response['like_flag'] == 1) {
+						$('.up_vote').addClass('text-success');
+					}
+					else if(response['like_flag'] == -1) {
+						$('.down_vote').addClass('text-danger');
+					}
+				}, 'json');
+
 				$('#text_editor').summernote({
   					height: 250,                 // set editor height
   					focus: true                  // set focus to editable area after initializing summernote
@@ -171,18 +181,44 @@
 
 				$('.fa-thumbs-up').click(function() {
 					$.post('../actions/update/update_likes_count.php', {'ques_id': <?php echo $_GET['ques_id']; ?>, 'user_id': <?php echo $_SESSION['user_id']; ?>, 'like_flag': 1}, function(response) {
-						update_likes_counter(1);
-						$('.up_vote').addClass('text-success');
-						$('.down_vote').removeClass('text-danger');
+						
+						if(response >1) {
+							$('.message').html('You have already liked this post').show().fadeOut(2000);
+						}
+						else if(response < -1) {
+							$('.message').html('You have already unliked this post').show().fadeOut(2000);
+						}
+						else if(response == 1) {
+							update_likes_counter(1);
+							$('.up_vote').addClass('text-success');
+							$('.down_vote').removeClass('text-danger');
+						}
+						else {
+							update_likes_counter(1);
+							$('.up_vote').removeClass('text-success');
+							$('.down_vote').removeClass('text-danger');
+						}
 					});
 				});
 
 				$('.fa-thumbs-down').click(function() {
 					$.post('../actions/update/update_likes_count.php', {'ques_id': <?php echo $_GET['ques_id']; ?>, 'user_id': <?php echo $_SESSION['user_id']; ?>, 'like_flag': -1}, function(response) {
-						if(response) {
+						
+						if(response >1) {
+							$('.message').html('You have already liked this post').show().fadeOut(2000);
+						}
+						else if(response < -1) {
+							$('.message').html('You have already unliked this post').show().fadeOut(2000);
+						}
+						else if(response == -1){
 							update_likes_counter(-1);
 							$('.up_vote').removeClass('text-success');
 							$('.down_vote').addClass('text-danger');
+						}
+						else {
+							update_likes_counter(-1);
+							$('.up_vote').removeClass('text-success');
+							$('.down_vote').removeClass('text-danger');
 						}
 					});
 				});
