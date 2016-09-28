@@ -2,7 +2,7 @@
 	
 	$ques_id = $_GET['ques_id'];
 
-	$sql = "SELECT * from questions INNER JOIN users ON questions.user_id=users.user_id where ques_id='$ques_id'";
+	$sql = "SELECT * from questions INNER JOIN users ON questions.user_id=users.user_id where ques_id='".$ques_id."'";
 
 	$result = $db->query($sql);
 	$ques = "";
@@ -11,6 +11,7 @@
 	$error = "";
 	$created_at = "";
 	if($result->num_rows > 0) {
+
 		$row = $result->fetch_array(MYSQLI_ASSOC);
 		$title = $row['title'];
 		$question = $row['question'];

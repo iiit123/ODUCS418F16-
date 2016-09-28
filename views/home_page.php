@@ -35,7 +35,7 @@
 						</div>
 						<div class="col-md-2">
 							<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-							votes - 123
+							votes - <?php echo $row['likes_count'];?>
 						</div>
 						<div class="col-md-2">
 							<i class="fa fa-file-text-o" aria-hidden="true"></i>
