@@ -10,5 +10,5 @@
 	session_start();
 
 
-	$labels = ['default', 'info', 'primary', 'warning', 'danger' , 'success'];		
+	$labels = ['danger','warning', 'default', 'info', 'primary',  'success'];		
 ?>

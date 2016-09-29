@@ -108,9 +108,9 @@
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
 		<?php include('script_files'); ?>
 		<script>
-			function update_likes_counter(value) {
-				var likes_count = parseInt($('.likes_count').text()) + value;
-				$('.likes_count').text(likes_count);
+			function update_likes_counter(_this, value) {
+				var likes_count = parseInt($(_this).siblings('.likes_count').text()) + value;
+				$(_this).siblings('.likes_count').text(likes_count);
 			}
 
 			function edit_content(_this) {
@@ -190,6 +190,7 @@
 				});
 
 				$('.fa-thumbs-up').click(function() {
+					var _this = this;
 					$.post('../actions/update/update_likes_count.php', {'ques_id': <?php echo $_GET['ques_id']; ?>, 'user_id': <?php echo $_SESSION['user_id']; ?>, 'like_flag': 1}, function(response) {
 						
 						if(response >1) {
@@ -199,19 +200,20 @@
 							$('.message').html('You have already unliked this post').show().fadeOut(2000);
 						}
 						else if(response == 1) {
-							update_likes_counter(1);
-							$('.up_vote').addClass('text-success');
-							$('.down_vote').removeClass('text-danger');
+							update_likes_counter(_this, 1);
+							$(_this).addClass('text-success');
+							$(_this).siblings('.down_vote').removeClass('text-danger');
 						}
 						else {
-							update_likes_counter(1);
-							$('.up_vote').removeClass('text-success');
-							$('.down_vote').removeClass('text-danger');
+							update_likes_counter(_this, 1);
+							$(_this).removeClass('text-success');
+							$(_this).siblings('.down_vote').removeClass('text-danger');
 						}
 					});
 				});
 
 				$('.fa-thumbs-down').click(function() {
+					var _this = this;
 					$.post('../actions/update/update_likes_count.php', {'ques_id': <?php echo $_GET['ques_id']; ?>, 'user_id': <?php echo $_SESSION['user_id']; ?>, 'like_flag': -1}, function(response) {
 						
 						if(response >1) {
@@ -221,14 +223,14 @@
 							$('.message').html('You have already unliked this post').show().fadeOut(2000);
 						}
 						else if(response == -1){
-							update_likes_counter(-1);
-							$('.up_vote').removeClass('text-success');
-							$('.down_vote').addClass('text-danger');
+							update_likes_counter(_this, -1);
+							$(_this).siblings('.up_vote').removeClass('text-success');
+							$(_this).addClass('text-danger');
 						}
 						else {
-							update_likes_counter(-1);
-							$('.up_vote').removeClass('text-success');
-							$('.down_vote').removeClass('text-danger');
+							update_likes_counter(_this, -1);
+							$(_this).siblings('.up_vote').removeClass('text-success');
+							$(_this).removeClass('text-danger');
 						}
 					});
 				});

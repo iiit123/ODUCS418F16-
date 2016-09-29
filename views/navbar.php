@@ -28,8 +28,15 @@
         		</div>
         		<div id="navbar" class="navbar-collapse collapse">
           		<ul class="nav navbar-nav">
-           			<li class="active"><a href="./ask_question.php">Ask Question</a></li>
-            		<li><a href="#about">About</a></li>
+           			<li class="active"><a href="./ask_question.php">
+                  <i class="fa fa-question-circle-o fa-lg" aria-hidden="true"></i>
+                  &nbsp;Ask Question
+                </a></li>
+            		<li><a href="#tags">
+                  <i class="fa fa-tags" aria-hidden="true"></i>
+                  &nbsp;Tags
+                   </a>
+                </li>
             		<li><a href="#contact">Contact</a></li>
             		<li class="dropdown">
              	 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

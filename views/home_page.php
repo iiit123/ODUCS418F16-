@@ -35,15 +35,15 @@
 						</div>
 						<div class="col-md-2">
 							<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-							<i>votes</i>  <?php echo $row['likes_count'];?>
+							votes  <?php echo $row['likes_count'];?>
 						</div>
 						<div class="col-md-2">
 							<i class="fa fa-file-text-o" aria-hidden="true"></i>
-							<i>answers</i>  12
+							answers  12
 						</div>
 						<div class="col-md-2">
 							<i class="fa fa-eye" aria-hidden="true"></i>
-							<i>views</i>  <?php echo $row['views']; ?>
+							views  <?php echo $row['views']; ?>
 						</div>
 					</div>
 				<?php } ?>
