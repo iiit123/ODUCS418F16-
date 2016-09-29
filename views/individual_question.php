@@ -62,7 +62,12 @@
 									<i class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>
 									<p class="help-block likes_count"> 100 </p>
 									<i class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i> <br/>  </br>
-									<i class="fa fa-check fa-2x correct" aria-hidden="true"></i>
+									<?php if($answer['is_correct']) { ?>
+										<i class="fa fa-check fa-2x correct text-success" aria-hidden="true"></i>
+									<?php } else { ?>
+											<i class="fa fa-check fa-2x correct" aria-hidden="true"></i>			
+									<?php }?>
+									<input type="hidden" class="hidden_id" value="<?php echo $answer['ans_id'];?>" />
 							</div>
 							<div class="col-md-10">
                             	<p><?php echo $answer['answer']; ?></p>
@@ -72,7 +77,7 @@
 									</span>
 									<span class="pull-right">
 										<i class="fa fa-calendar" aria-hidden="true"></i>
-										<?php echo date('d-M-Y', strtotime($answer['created_at'])) ;?>
+										<?php echo date('d-M-Y', strtotime($answer['created_at'])); ?>
 									</span>
 								</p>
 							</div>
@@ -139,6 +144,11 @@
 					else if(response['like_flag'] == -1) {
 						$('.down_vote').addClass('text-danger');
 					}
+
+					if(response['star_flag'] == 1) {
+						$('.favourite').addClass('text-warning');
+					}
+
 				}, 'json');
 
 				$('#text_editor').summernote({
@@ -224,11 +234,23 @@
 				});
 
 				$('.favourite').click(function() {
-					$( this ).toggleClass( "text-warning" );
+					var _this = this;
+					$.post('../actions/update/update_star.php', {'ques_id': <?php echo $_GET['ques_id']; ?>}, function(response){
+						if(response) {
+							$( _this ).toggleClass( "text-warning" );
+						}
+					});
 				});
 
 				$('.correct').click(function() {
-					$(this).toggleClass("text-success");
+					var _this = this;
+					var ans_id = $(this).siblings('.hidden_id').val();
+					$.post('../actions/update/update_correct_ans.php', {'ques_id': <?php echo $_GET['ques_id']; ?>, 'ans_id': ans_id}, function(response) {
+						if(response){
+							$('.correct').removeClass('text-success');
+							$(_this).toggleClass("text-success");
+						}			
+					})
 				});
 
 				$('.edit').click(function() {
