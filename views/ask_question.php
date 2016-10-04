@@ -68,8 +68,7 @@
 
 
 		$('#text_editor').summernote({
-  			height: 250,                 // set editor height
-  			focus: true                  // set focus to editable area after initializing summernote
+  			height: 250	                 // set editor height
 		});
 
 		$('.submit_ques').click(function(e) {

@@ -37,21 +37,24 @@
                   &nbsp;Tags
                    </a>
                 </li>
-            		<li><a href="#contact">Contact</a></li>
-            		<li class="dropdown">
-             	 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              			<ul class="dropdown-menu">
-                			<li><a href="#">Action</a></li>
-                			<li><a href="#">Another action</a></li>
-                			<li><a href="#">Something else here</a></li>
-                			<li role="separator" class="divider"></li>
-                			<li class="dropdown-header">Nav header</li>
-                			<li><a href="#">Separated link</a></li>
-               	 			<li><a href="#">One more separated link</a></li>
-              			</ul>
-            		</li>
-          		</ul>
-          		<ul class="nav navbar-nav navbar-right login-btns">
+            	</ul>
+
+              <div class="col-sm-3 col-md-6">
+                  <form action="./home_page.php" method="get" class="navbar-form" role="search">
+                      <div class="input-group" style="width:100%;">
+                          <input type="text" class="form-control" placeholder="Search for a tag" name="tag">
+                          <div class="input-group-btn">
+                              <button class="btn btn-default" type="submit">
+                                GO!
+                              </button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+
+
+          		
+              <ul class="nav navbar-nav navbar-right login-btns">
                 <?php if(!isset($_SESSION['user_id'])) { ?>
           			<button class="btn btn-success"> 
           				<i class="fa fa-user-plus" aria-hidden="true"></i>

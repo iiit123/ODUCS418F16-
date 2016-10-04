@@ -6,6 +6,7 @@
 	$user_id = $_POST['user_id']; 
 	$like_flag = $_POST['like_flag'];
 
+	
 
 	$sql = "SELECT like_flag from likes where ques_id ='".$ques_id."' AND user_id ='".$user_id ."'";
 	$result = $db->query($sql);

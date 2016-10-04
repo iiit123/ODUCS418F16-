@@ -9,8 +9,12 @@
 				font-family: 'Istok Web', sans-serif;
 				line-height: 1.6em;
 			}
+			.no_underline {
+				text-decoration: none !important;
+			}
 			a{
 				cursor: pointer;
+
 			}
 			.fa{
 				cursor: pointer;
@@ -23,6 +27,10 @@
 			}
 			.hide {
 				display: none;
+			}
+			.label:hover{
+				font-size: 12px;
+				text-decoration: none;
 			}
 		</style>
 	</head>

@@ -1,7 +1,14 @@
 <?php include('../config.php'); ?>
 <?php include('header.php'); ?>
 <?php include('navbar.php'); ?>
-<?php include('../actions/get/get_all_questions.php');?>
+<?php 
+	if(isset($_GET['tag'])) {
+		include('../actions/get/get_tag_related_questions.php');
+	}
+	else {
+		include('../actions/get/get_all_questions.php');
+	}
+?>
 
 		<div class="main_container container">
 			<div class="row">
@@ -19,18 +26,26 @@
                     }?>
 
 
-					<h4> Recent Questions  </h4> <hr/>
+                    <?php if(isset($_GET['tag'])) { ?>
+						<h4> <?php echo $_GET['tag'];?> Questions  </h4> <hr/>
+					<?php } else { ?>
+						<h4> Recent Questions  </h4> <hr/>
+					<?php } ?>
+					
 					<?php 
-						foreach($rows as $row) {
+						foreach($questions as $row) {
 							$created_at = date('d-M-Y', strtotime($row['created_at']));
 							$tags = explode(',', $row['tags']);
 
 					?>
+
 					<p> <a href="./individual_question.php?ques_id=<?php echo $row['ques_id'];?>"><?php echo $row['title']; ?></a> </p>
 					<div style="margin-bottom:30px;" class="row">
 						<div class="col-md-6">
 							<?php foreach($tags as $key => $tag) {?>
-								<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
+								<a class="no_underline" href="./home_page.php?tag=<?php echo $tag ?>">
+									<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
+								</a>
 							<?php }?>
 						</div>
 						<div class="col-md-2">
@@ -39,7 +54,7 @@
 						</div>
 						<div class="col-md-2">
 							<i class="fa fa-file-text-o" aria-hidden="true"></i>
-							answers  12
+							answers  <?php echo $row['answers_count'];?>
 						</div>
 						<div class="col-md-2">
 							<i class="fa fa-eye" aria-hidden="true"></i>

@@ -1,7 +1,7 @@
 <?php include('header.php'); ?>
 <?php include('navbar.php'); ?>
 <?php include('../actions/get/get_individual_question.php');?>
-<?php include('../actions/update/update_individual_question.php'); ?>
+<?php include('../actions/update/update_views.php'); ?>
 <?php include('../actions/get/get_answers.php'); ?>
 
 <?php update_question_views($db, $_GET['ques_id']); ?>
@@ -17,7 +17,7 @@
 							<i class="fa fa-star fa-2x favourite" aria-hidden="true"></i>
 						</div>
 						<div class="col-md-10">
-							<p style="display:none;" class="alert alert-warning message"></p>
+							<p style="display:none;" class="question_warning alert alert-warning message"></p>
 							<p class="content">
 								<?php echo $question; ?>
 							</p>	
@@ -25,7 +25,9 @@
 
 								<?php 
 								foreach($tags as $key => $tag) {?>
-									<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
+									<a class="no_underline" href="./home_page.php?tag=<?php echo $tag ?>">
+										<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
+									</a>
 								<?php }?>
 								<span style="margin-left:30px;" class="pull-right">
 									<i class="fa fa-calendar" aria-hidden="true"></i>
@@ -116,7 +118,7 @@
 			function edit_content(_this) {
 				var para_text = $(_this).parent().siblings('.content');
 				var text = para_text.text();
-				var input = '<textarea class="content form-control" rows="5" >'+ text +'</textarea>';
+				var input = '<textarea class="edit_content_question form-control" rows="5" >'+ text +'</textarea>';
 				para_text.html(input);
 
 				$(_this).siblings('.done').show();
@@ -124,13 +126,21 @@
 			}
 
 			function done_content(_this) {
-				$(_this).siblings('.edit').show();
-				$(_this).hide();
 
-				var para_text = $(_this).parent().siblings('.content');
-				var text = para_text.text();
-				para_text.html(text);
+				$.post('../actions/update/update_individual_question.php', {'ques_id': "<?php echo $_GET['ques_id']; ?>", "question": $('.edit_content_question').val()}, function(response) {
+					if(response) {
+						$(_this).siblings('.edit').show();
+						$(_this).hide();
+						var para_text = $(_this).parent().siblings('.content');
+						var text = $('.edit_content_question').val();
+						para_text.html(text);
+						$('.question_warning').html('Your question has been sucessfully updated!').show().fadeOut(2000);
+					}
+					else {
+						$('.question_warning').html('Something went wrong. Please try again!').show().fadeOut(2000);
+					}
 
+				});
 			}
 
 			$(document).ready(function() {
@@ -152,8 +162,7 @@
 				}, 'json');
 
 				$('#text_editor').summernote({
-  					height: 250,                 // set editor height
-  					focus: true                  // set focus to editable area after initializing summernote
+  					height: 250                 // set editor height
 				});
 
 				$(".answer_submit").click(function(e) {
