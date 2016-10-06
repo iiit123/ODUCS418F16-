@@ -28,18 +28,18 @@
         		</div>
         		<div id="navbar" class="navbar-collapse collapse">
           		<ul class="nav navbar-nav">
-           			<li class="active"><a href="./ask_question.php">
+           			<li class="header_url"><a href="./ask_question.php">
                   <i class="fa fa-question-circle-o fa-lg" aria-hidden="true"></i>
                   &nbsp;Ask Question
                 </a></li>
-            		<li><a href="#tags">
-                  <i class="fa fa-tags" aria-hidden="true"></i>
-                  &nbsp;Tags
+            		<li class="header_url"><a href="./display_stats.php">
+                  <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                  &nbsp;Statistics
                    </a>
                 </li>
             	</ul>
 
-              <div class="col-sm-3 col-md-6">
+              <div class="col-sm-3 col-md-5">
                   <form action="./home_page.php" method="get" class="navbar-form" role="search">
                       <div class="input-group" style="width:100%;">
                           <input type="text" class="form-control" placeholder="Search for a tag" name="tag">

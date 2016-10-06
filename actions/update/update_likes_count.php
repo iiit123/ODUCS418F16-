@@ -1,6 +1,7 @@
 <?php 
 
     include('../../config.php');
+    include('../insert/insert_notification.php');
 
 	$ques_id = $_POST['ques_id'];
 	$user_id = $_POST['user_id']; 

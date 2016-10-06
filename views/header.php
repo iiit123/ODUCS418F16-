@@ -32,6 +32,18 @@
 				font-size: 12px;
 				text-decoration: none;
 			}
+			.notifications {
+				border: 1px solid #faebcc;
+				border-radius: 4px;
+				color: #8a6d3b;
+				padding: 14px;
+				width: 25%;
+				height: 15%;
+				background: #fcf8e3;
+				position: fixed;
+				right: 58px;
+				bottom: 10px;
+			}
 		</style>
 	</head>
 

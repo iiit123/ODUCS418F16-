@@ -7,7 +7,7 @@
 	$tags = $_POST['tags'];
 
 
-	$sql = "INSERT INTO questions (title, question, tags, user_id) VALUES ('".$title."', '".$question."', '".$tags."', '".$user_id."')";
+	$sql = "INSERT INTO questions (title, question, tags, user_id) VALUES ('".$title."', '".$question."', '".$tags."', '".$_SESSION['user_id']."')";
 
 
 	if ($db->query($sql) === TRUE) {
