@@ -15,7 +15,7 @@ $(document).ready(function () {
                 type: 'pie'
             },
             title: {
-                text: 'Tags visualisation'
+                text: 'Tags'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
