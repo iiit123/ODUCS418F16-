@@ -19,7 +19,7 @@
 						<div class="col-md-10">
 							<p style="display:none;" class="question_warning alert alert-warning message"></p>
 							<p class="content">
-								<?php echo $question; ?>
+								<?php print_r($question); ?>
 							</p>	
 							<p>
 
@@ -61,12 +61,14 @@
 						<hr/>
 						<div class="row">
 							<div class="col-md-1 text-center">
-									<i class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>
+								<!--	<i class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>
 									<p class="help-block likes_count"> 100 </p>
-									<i class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i> <br/>  </br>
-									<?php if($answer['is_correct']) { ?>
+									<i class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i>--> <br/> 
+									<?php if($answer['is_correct'] && $asker_id == $USER_ID) { ?>
 										<i class="fa fa-check fa-2x correct text-success" aria-hidden="true"></i>
-									<?php } else { ?>
+									<?php } else if($answer['is_correct'] && $asker_id != $USER_ID) {?>
+										<i class="fa fa-check fa-2x text-success" style="cursor:default;"aria-hidden="true"></i>
+									<?php } elseif($asker_id == $USER_ID) { ?>
 											<i class="fa fa-check fa-2x correct" aria-hidden="true"></i>			
 									<?php }?>
 									<input type="hidden" class="hidden_id" value="<?php echo $answer['ans_id'];?>" />
@@ -92,7 +94,11 @@
 						<div class="col-md-12">
 							<p style="display:none;" class="alert alert-success ans_success">Your answer has been successfully posted!</p>
 							<textarea name="question" id="text_editor"></textarea>
-							<button class="answer_submit btn btn-primary"> 
+							<?php if(!isset($_SESSION['user_id'])) {?>
+								<button class="btn btn-primary" disabled> 
+							<?php }  else {?>
+								<button class="answer_submit btn btn-primary"> 
+							<?php } ?>
 								<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 								Post Your Answer 
 							</button>
@@ -200,68 +206,92 @@
 
 				$('.fa-thumbs-up').click(function() {
 					var _this = this;
-					$.post('../actions/update/update_likes_count.php', {'ques_id': <?php echo $_GET['ques_id']; ?>, 'user_id': <?php echo $_SESSION['user_id']; ?>, 'like_flag': 1}, function(response) {
-						
-						if(response >1) {
-							$('.message').html('You have already liked this post').show().fadeOut(2000);
-						}
-						else if(response < -1) {
-							$('.message').html('You have already unliked this post').show().fadeOut(2000);
-						}
-						else if(response == 1) {
-							update_likes_counter(_this, 1);
-							$(_this).addClass('text-success');
-							$(_this).siblings('.down_vote').removeClass('text-danger');
-						}
-						else {
-							update_likes_counter(_this, 1);
-							$(_this).removeClass('text-success');
-							$(_this).siblings('.down_vote').removeClass('text-danger');
-						}
-					});
+					var user_id = <?php echo $USER_ID;?>;
+					if(user_id == undefined) {
+						$('.message').html('Please login to perform this !').show().fadeOut(2000);
+					}
+					else {
+						$.post('../actions/update/update_likes_count.php', {'ques_id': <?php echo $_GET['ques_id']; ?>, 'user_id': user_id, 'like_flag': 1}, function(response) {
+											
+							if(response >1) {
+								$('.message').html('You have already liked this post').show().fadeOut(2000);
+							}
+							else if(response < -1) {
+								$('.message').html('You have already unliked this post').show().fadeOut(2000);
+							}
+							else if(response == 1) {
+								update_likes_counter(_this, 1);
+								$(_this).addClass('text-success');
+								$(_this).siblings('.down_vote').removeClass('text-danger');
+							}
+							else {
+								update_likes_counter(_this, 1);
+								$(_this).removeClass('text-success');
+								$(_this).siblings('.down_vote').removeClass('text-danger');
+							}
+						});
+					}
 				});
 
 				$('.fa-thumbs-down').click(function() {
 					var _this = this;
-					$.post('../actions/update/update_likes_count.php', {'ques_id': <?php echo $_GET['ques_id']; ?>, 'user_id': <?php echo $_SESSION['user_id']; ?>, 'like_flag': -1}, function(response) {
-						
-						if(response >1) {
-							$('.message').html('You have already liked this post').show().fadeOut(2000);
-						}
-						else if(response < -1) {
-							$('.message').html('You have already unliked this post').show().fadeOut(2000);
-						}
-						else if(response == -1){
-							update_likes_counter(_this, -1);
-							$(_this).siblings('.up_vote').removeClass('text-success');
-							$(_this).addClass('text-danger');
-						}
-						else {
-							update_likes_counter(_this, -1);
-							$(_this).siblings('.up_vote').removeClass('text-success');
-							$(_this).removeClass('text-danger');
-						}
-					});
+					var user_id = <?php echo $USER_ID;?>;
+					if(user_id == undefined) {
+						$('.message').html('Please login to perform this !').show().fadeOut(2000);
+					}
+					else {
+						$.post('../actions/update/update_likes_count.php', {'ques_id': <?php echo $_GET['ques_id']; ?>, 'user_id': user_id, 'like_flag': -1}, function(response) {
+							
+							if(response >1) {
+								$('.message').html('You have already liked this post').show().fadeOut(2000);
+							}
+							else if(response < -1) {
+								$('.message').html('You have already unliked this post').show().fadeOut(2000);
+							}
+							else if(response == -1){
+								update_likes_counter(_this, -1);
+								$(_this).siblings('.up_vote').removeClass('text-success');
+								$(_this).addClass('text-danger');
+							}
+							else {
+								update_likes_counter(_this, -1);
+								$(_this).siblings('.up_vote').removeClass('text-success');
+								$(_this).removeClass('text-danger');
+							}
+						});
+					}
 				});
 
 				$('.favourite').click(function() {
 					var _this = this;
-					$.post('../actions/update/update_star.php', {'ques_id': <?php echo $_GET['ques_id']; ?>}, function(response){
-						if(response) {
-							$( _this ).toggleClass( "text-warning" );
-						}
-					});
+					var user_id = <?php echo $USER_ID;?>;
+					if(user_id == undefined) {
+						$('.message').html('Please login to perform this !').show().fadeOut(2000);
+					}
+					else {
+						$.post('../actions/update/update_star.php', {'ques_id': <?php echo $_GET['ques_id']; ?>}, function(response){
+							if(response) {
+								$( _this ).toggleClass( "text-warning" );
+							}
+						});
+					}
 				});
 
 				$('.correct').click(function() {
 					var _this = this;
+					var hasClass = $(this).hasClass('text-success');
 					var ans_id = $(this).siblings('.hidden_id').val();
-					$.post('../actions/update/update_correct_ans.php', {'ques_id': <?php echo $_GET['ques_id']; ?>, 'ans_id': ans_id}, function(response) {
-						if(response){
-							$('.correct').removeClass('text-success');
-							$(_this).toggleClass("text-success");
-						}			
-					})
+					var user_id = <?php echo $USER_ID;?>;
+					if(user_id != undefined)  {
+						$.post('../actions/update/update_correct_ans.php', {'ques_id': <?php echo $_GET['ques_id']; ?>, 'ans_id': ans_id}, function(response) {
+							if(response){
+								$('.correct').removeClass('text-success');
+								if(!hasClass) {
+									$(_this).addClass('text-success');
+								}
+							}			
+						});
+					}
 				});
 
 				$('.edit').click(function() {

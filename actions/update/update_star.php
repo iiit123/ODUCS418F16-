@@ -2,6 +2,11 @@
 	
 	include('../../config.php');
 
+	if($user_id == undefined) {
+		echo false;
+		exit();
+	}
+
 	$ques_id = $_POST['ques_id'];
 
 	$sql = "SELECT star_flag from likes where ques_id ='".$ques_id."' AND user_id ='".$_SESSION['user_id'] ."'";

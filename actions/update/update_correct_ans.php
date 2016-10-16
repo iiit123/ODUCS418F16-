@@ -3,7 +3,6 @@
 	include('../../config.php');
 	$ans_id = $_POST['ans_id'];
 	$ques_id = $_POST['ques_id'];
-	$user_id = $_SESSION['user_id'];
 
 	$sql = "SELECT * from answers where ans_id='".$ans_id."'";
 	$result = $db->query($sql);

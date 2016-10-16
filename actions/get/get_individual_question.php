@@ -10,9 +10,11 @@
 	$tags = "";
 	$error = "";
 	$created_at = "";
+	$asker_id = "";
 	if($result->num_rows > 0) {
 
 		$row = $result->fetch_array(MYSQLI_ASSOC);
+		$asker_id = $row['user_id'];
 		$title = $row['title'];
 		$question = $row['question'];
 		$tags = $row['tags'];

@@ -16,6 +16,9 @@
 				cursor: pointer;
 
 			}
+			.alert{
+				padding: 7px !important;
+			}
 			.fa{
 				cursor: pointer;
 			}
