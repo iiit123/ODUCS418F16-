@@ -3,12 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 17, 2016 at 07:55 PM
+-- Generation Time: Oct 17, 2016 at 07:59 PM
 -- Server version: 5.7.13
 -- PHP Version: 5.5.27
 
-SET SQL_MODE='ALLOW_INVALID_DATES';
-
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -19,6 +19,8 @@ SET SQL_MODE='ALLOW_INVALID_DATES';
 --
 -- Database: `milestone1dump`
 --
+CREATE DATABASE IF NOT EXISTS `milestone1dump` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `milestone1dump`;
 
 -- --------------------------------------------------------
 
