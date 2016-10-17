@@ -7,7 +7,7 @@
 -- Server version: 5.7.13
 -- PHP Version: 5.5.27
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE='ALLOW_INVALID_DATES';
 SET time_zone = "+00:00";
 
 
