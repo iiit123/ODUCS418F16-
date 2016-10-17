@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 17, 2016 at 07:23 PM
+-- Generation Time: Oct 17, 2016 at 07:24 PM
 -- Server version: 5.7.13
 -- PHP Version: 5.5.27
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `milestone1dump`
 --
+CREATE DATABASE IF NOT EXISTS `milestone1dump` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `milestone1dump`;
 
 -- --------------------------------------------------------
 
