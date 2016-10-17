@@ -7,6 +7,10 @@
 	$sql = "SELECT user_id, name FROM users WHERE name = '$name' and password = '$password'";
  
     $result = mysqli_query($db,$sql);
+   
+    if(!$result) {
+        die("query failed");
+    }
 
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
