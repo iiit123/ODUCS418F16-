@@ -5,7 +5,6 @@
 	<div class="main_container container">
 			<div class="row">
 
-				<!-- question and answers section --> 
 				<div class="col-md-9">
 
 					<?php if(!isset($_SESSION['user_id'])) {?>
@@ -66,7 +65,6 @@
 <?php include('script_files');?>
 <script type="text/javascript">
 	$(document).ready(function() {
-
 
 		$('#text_editor').summernote({
   			height: 250	                 // set editor height

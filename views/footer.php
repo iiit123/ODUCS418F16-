@@ -3,6 +3,8 @@
 	</div> -->
 	<script type="text/javascript">
 		$(document).ready(function() {
+
+			//used to highlight the navbar title which is clicked.
 			var last_part = window.location.href.split('/').pop();
 			last_part = "./"+last_part;
 			$('.header_url a').each(function(key, value) {

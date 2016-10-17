@@ -1,4 +1,6 @@
-
+/**
+ * Get the stats of ques and ans and displays in the databases.
+ */
 $(document).ready(function () {
 
     $.get('../actions/get/get_questions_ans_count.php', function(response) {

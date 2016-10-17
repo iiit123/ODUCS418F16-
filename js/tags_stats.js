@@ -1,3 +1,6 @@
+/**
+ * fetch all the tags in the database and displays as pie chart.
+ */
 
 $(document).ready(function () {
 
