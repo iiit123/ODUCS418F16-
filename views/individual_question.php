@@ -1,14 +1,17 @@
-<?php include('header.php'); ?>
-<?php include('navbar.php'); ?>
+<?php include('../config.php'); ?>
 <?php include('../actions/get/get_individual_question.php');?>
 <?php include('../actions/update/update_views.php'); ?>
 <?php include('../actions/get/get_answers.php'); ?>
+<?php include('header.php'); ?>
+<?php include('navbar.php'); ?>
 
 <?php update_question_views($db, $_GET['ques_id']); ?>
+	    <title> INDIVIDUAL QUESTION PAGE </title>
+
 		<div class="main_container container">
 			<div class="row">
 				<h3> <?php echo $title;?>  </h3> <hr>
-				<div class="col-md-8">
+				<div class="col-md-9">
 					<div style="margin-bottom:30px;" class="row">
 						<div class="col-md-1 text-center">
 							<i class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>
@@ -18,17 +21,16 @@
 						</div>
 						<div class="col-md-10">
 							<p style="display:none;" class="question_warning alert alert-warning message"></p>
-							<p class="content">
-								<?php print_r($question); ?>
-							</p>	
+							<?php echo '<span class="content">'.$question.'</span>'; ?>	
 							<p>
 
-								<?php 
+								<?php
+								if($tags!="") { 
 								foreach($tags as $key => $tag) {?>
 									<a class="no_underline" href="./home_page.php?tag=<?php echo $tag ?>">
 										<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
 									</a>
-								<?php }?>
+								<?php }}?>
 								<span style="margin-left:30px;" class="pull-right">
 									<i class="fa fa-calendar" aria-hidden="true"></i>
 									<?php echo $created_at ;?>
@@ -40,7 +42,7 @@
 							</p>
 							</br>
 							<p>
-								<a href="#"> <i style="color:black;" class="fa fa-user" aria-hidden="true"></i> <?php echo $email ;?> </a>
+								<a href="#"> <i style="color:black;" class="fa fa-user" aria-hidden="true"></i> <?php echo $name ;?> </a>
 								<a style="margin-left:25px;" class="link pull-right" href="#"> report abuse </a>
 								<a class="edit link pull-right" href="#">edit </a> &nbsp;
 								<a class="done link pull-right" style="display: none;" href="#">done </a> &nbsp;	
@@ -53,7 +55,7 @@
 
 					<div class="answer_container">
 						<?php if($answers_count != 0) { ?>
-							<h4> <?php echo $answers_count ;?> Answers  </h4> 
+							<h4> <span id="ans_count"><?php echo $answers_count ;?></span> Answers  </h4> 
 						<?php }?>
 
 						<?php if($answers_count != 0) { 
@@ -74,10 +76,10 @@
 									<input type="hidden" class="hidden_id" value="<?php echo $answer['ans_id'];?>" />
 							</div>
 							<div class="col-md-10">
-                            	<p><?php echo $answer['answer']; ?></p>
+                            	<p><?php echo decode_data($answer['answer']); ?></p>
 								<p>
 									<span>
-										<a href="#"> <i style="color:black;" class="fa fa-user" aria-hidden="true"></i> <?php echo $answer['email'] ;?> </a>
+										<a href="#"> <i style="color:black;" class="fa fa-user" aria-hidden="true"></i> <?php echo $answer['name'] ;?> </a>
 									</span>
 									<span class="pull-right">
 										<i class="fa fa-calendar" aria-hidden="true"></i>
@@ -105,7 +107,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-md-offset-1">
+				<div class="col-md-3">
 					<h4 style="margin-top:0px;"> Related </h4> <hr/>
 					<p><a class="link"> C++11 trailing return member function using decltype and constness </a> </p>
 					<p> <a class="link"> Trailing return types, decltype and const-ness </a></p>
@@ -124,8 +126,16 @@
 			function edit_content(_this) {
 				var para_text = $(_this).parent().siblings('.content');
 				var text = para_text.text();
-				var input = '<textarea class="edit_content_question form-control" rows="5" >'+ text +'</textarea>';
+				var input = '<textarea id="edit_ques" class="edit_content_question form-control" rows="5" ></textarea>';
+
 				para_text.html(input);
+
+				$('#edit_ques').summernote({
+					  height: 300          
+				});
+
+				$('#edit_ques').summernote('code', text);
+
 
 				$(_this).siblings('.done').show();
 				$(_this).hide();
@@ -179,13 +189,14 @@
 						e.preventDefault();
 						$.post('../actions/insert/insert_answer.php', {'ques_id': <?php echo $_GET['ques_id'] ?>, 'answer': $('#text_editor').val()}, function(response) {
 							if(response) {
+								$('#ans_count').text(parseInt($('#ans_count').text())+1);
 								$('.ans_success').show().fadeOut(1600);
 								$('.answer_container').append('<hr/><div class="row">'
 										+'<div class="col-md-1 text-center">'
-											+'<i class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>'
-											+'<p class="help-block likes_count"> 0 </p>'
-											+'<i class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i> <br/>  </br>'
-											+'<i class="fa fa-check fa-2x correct" aria-hidden="true"></i>'
+											// +'<i class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>'
+											// +'<p class="help-block likes_count"> 0 </p>'
+											// +'<i class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i> <br/>  </br>'
+											+'</br> <i class="fa fa-check fa-2x correct" aria-hidden="true"></i>'
 										+'</div>'
 										+'<div class="col-md-10">'
 											+'<p>'+$('#text_editor').val()+'</p>'

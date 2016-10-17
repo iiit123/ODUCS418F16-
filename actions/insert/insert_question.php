@@ -1,10 +1,12 @@
 <?php 
 
 	include('../../config.php');
+	include('../../required_login.php');
+    
 	
-	$title = $_POST['title'];
-	$question = $_POST['question'];
-	$tags = $_POST['tags'];
+	$title = trim_data($db, $_POST['title']);
+	$question = trim_data($db, $_POST['question']);
+	$tags = trim_data($db, $_POST['tags']);
 
 
 	$sql = "INSERT INTO questions (title, question, tags, user_id) VALUES ('".$title."', '".$question."', '".$tags."', '".$_SESSION['user_id']."')";

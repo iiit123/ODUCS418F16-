@@ -56,17 +56,19 @@
           		
               <ul class="nav navbar-nav navbar-right login-btns">
                 <?php if(!isset($_SESSION['user_id'])) { ?>
-          			<button class="btn btn-success"> 
-          				<i class="fa fa-user-plus" aria-hidden="true"></i>
-          				SIGN UP 
-          			</button>
           			<a href="./login_view.php">
                   <button class="btn btn-primary">
           			  	<i class="fa fa-sign-in" aria-hidden="true"></i>
           			  	LOG IN 
           			  </button>
                 </a>
-                <?php } else {   ?>
+                <?php } else {   
+                  ?>
+
+                  <span style="margin-right:25px;">
+                    <i style="color:grey;" class="fa fa-user" aria-hidden="true"></i>
+                    <?php echo $USERNAME; ?> 
+                  </span>
                   <a href="../actions/logout.php">
                     <button class="btn btn-danger">
                       <i class="fa fa-sign-out" aria-hidden="true"></i>

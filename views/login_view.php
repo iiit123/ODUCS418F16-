@@ -19,6 +19,7 @@
 
         </style>
 
+    <title> LOGIN PAGE </title>
 
     <div class="container">    
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
@@ -40,7 +41,7 @@
                                     
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="login-email" type="text" class="form-control" name="email" value="" placeholder="email" required/>     
+                                <input id="login-name" type="text" class="form-control" name="name" value="" placeholder="email" required/>     
                             </div>
                             <p id="login_email_error" style="display:none;" class="text-danger">Please enter valid email address<p>
                                 
@@ -128,24 +129,24 @@
                 $('#login_email_error').hide();
                 $('#login_password_error').hide();
 
-                $('#btn-login').click(function(e) {
-                    var email = $('#login-email').val(); 
-                    var password = $('#login-password').val();
-                    var email_result = check_email(email);
-                    var password_result = check_length($('#login-password'), 5, 'Password length should be more than 5');
+//                 $('#btn-login').click(function(e) {
+//                     var email = $('#login-email').val(); 
+//                     var password = $('#login-password').val();
+//                     var email_result = check_email(email);
+//                     var password_result = check_length($('#login-password'), 5, 'Password length should be more than 5');
 
-                    if(!email_result) {
-                        $('#login_email_error').show().fadeOut(3000);
-                        e.preventDefault();
-                    }
+//                     // if(!email_result) {
+//                     //     $('#login_email_error').show().fadeOut(3000);
+//                     //     e.preventDefault();
+//                     // }
                                      
-                    if(!password_result) {
-                        $('#login_password_error').show().fadeOut(3000);
-                        e.preventDefault();
-                    }
+//                     // if(!password_result) {
+//                     //     $('#login_password_error').show().fadeOut(3000);
+//                     //     e.preventDefault();
+//                     // }
 
-                    return email_result && password_result;
-                });
+// //                    return email_result && password_result;
+//                 });
 
                 $('#btn-signup').click(function(e){
                     var email = $('#signup-email').val(); 

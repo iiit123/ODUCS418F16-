@@ -1,6 +1,6 @@
-	<div class="notifications">
-		hello
-	</div>
+	<!-- <div class="notifications">
+		hello 	
+	</div> -->
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var last_part = window.location.href.split('/').pop();

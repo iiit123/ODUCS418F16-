@@ -13,8 +13,6 @@
 		$answers_count = count($answers);
 	}
 
-
-
     else {
     	echo "Error: " . $sql . "<br>" . $db->error;
     }

@@ -9,7 +9,7 @@
 		include('../actions/get/get_all_questions.php');
 	}
 ?>
-
+	    <title> HOME PAGE </title>
 		<div class="main_container container">
 			<div class="row">
 				<div class="col-md-8">
@@ -41,7 +41,7 @@
 
 					<p> <a href="./individual_question.php?ques_id=<?php echo $row['ques_id'];?>"><?php echo $row['title']; ?></a> </p>
 					<div style="margin-bottom:30px;" class="row">
-						<div class="col-md-6">
+						<div class="col-md-5">
 							<?php foreach($tags as $key => $tag) {?>
 								<a class="no_underline" href="./home_page.php?tag=<?php echo $tag ?>">
 									<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
@@ -52,9 +52,9 @@
 							<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
 							votes  <?php echo $row['likes_count'];?>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<i class="fa fa-file-text-o" aria-hidden="true"></i>
-							answers  <?php echo $row['answers_count'];?>
+							answers count  <?php echo $row['answers_count'];?>
 						</div>
 						<div class="col-md-2">
 							<i class="fa fa-eye" aria-hidden="true"></i>

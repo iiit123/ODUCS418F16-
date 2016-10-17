@@ -1,10 +1,10 @@
 <?php
 	include('../config.php');
 
-	$email = $_POST['email'];
-	$password = $_POST['password'];
+	$name = trim_data_login($db, $_POST['name']);
+	$password = trim_data_login($db, $_POST['password']);
 
-	$sql = "SELECT user_id, email FROM users WHERE email = '$email' and password = '$password'";
+	$sql = "SELECT user_id, name FROM users WHERE name = '$name' and password = '$password'";
  
     $result = mysqli_query($db,$sql);
 
@@ -15,7 +15,7 @@
     if($count == 1) {
      	  
         $_SESSION['user_id'] = $row['user_id'];
-        $_SESSION['email'] = $row['email'];
+        $_SESSION['name'] = $row['name'];
         
         header("location: ../views/home_page.php?login=success");
 
