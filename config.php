@@ -5,8 +5,8 @@
 	date_default_timezone_set('America/New_York');
 	
 	define('DB_SERVER', 'localhost');
- 	define('DB_USERNAME', 'root');
- 	define('DB_PASSWORD', 'password');
+ 	define('DB_USERNAME', 'admin');
+ 	define('DB_PASSWORD', 'M0n@rch$');
  	define('DB_DATABASE', 'milestone1dump');
  	$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 
