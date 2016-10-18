@@ -106,7 +106,7 @@
 					</div>
 				</div>
 				<div class="col-md-3">
-					<h4 style="margin-top:0px;"> Related </h4> <hr/>
+					<h4 style="margin-top:0px;"> Related <span style="font-size:10px;margin-left:10px;"class="pointer label label-info">Next Update</span> </h4> <hr/>
 					<p><a class="link"> C++11 trailing return member function using decltype and constness </a> </p>
 					<p> <a class="link"> Trailing return types, decltype and const-ness </a></p>
 				</div>

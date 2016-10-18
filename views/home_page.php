@@ -67,7 +67,7 @@
 					<div class="panel panel-default">
   						<div class="panel-heading">
   							<i class="fa fa-line-chart" aria-hidden="true"></i>
-  							Trending Tags
+  							Trending Tags <span style="margin-left:10px;"class="pointer label label-info">Next Update</span>
   						</div>
   						<div class="panel-body">
   							<ul class="list-group">
