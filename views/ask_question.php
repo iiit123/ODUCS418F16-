@@ -14,8 +14,10 @@
 					<?php } ?>
 
 
+				<?php if($USER_ID != undefined) { ?>
 				<form action="../actions/insert/insert_question.php" method="post">
-					<div class="form-group">
+				<?php } ?>
+ 					<div class="form-group">
     					<input type="text" class="form-control" name="title" id="title" placeholder="Ask your question. Be specific.">
   					</div>
 					<textarea name="question" id="text_editor"></textarea>
@@ -32,7 +34,9 @@
  							Post Your Question 
  						</button>
 					</div>
+				<?php if($USERID != undefined) { ?>
 				</form>
+				<?php }?>
 
 				<!-- how it works section -->
 				<div class="col-md-2 col-md-offset-1">

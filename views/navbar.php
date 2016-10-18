@@ -39,7 +39,7 @@
                 </li>
             	</ul>
 
-              <div class="col-sm-3 col-md-5">
+              <div class="col-sm-3 col-md-4">
                   <form action="./home_page.php" method="get" class="navbar-form" role="search">
                       <div class="input-group" style="width:100%;">
                           <input type="text" class="form-control" placeholder="Search for a tag" name="tag">
