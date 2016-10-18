@@ -1,5 +1,5 @@
 <?php 
-	$tag = $_GET['tag'];
+	$tag = trim_data($db,$_GET['tag']);
 	$sql = "select * from questions where tags like '%".$tag."%'";
 	$result = $db->query($sql);
 	$questions = [];
@@ -9,6 +9,7 @@
 		}
 	}
 	else {
+		unset($questions);
 		$error = "No questions found with this tag";
 	}
 ?>

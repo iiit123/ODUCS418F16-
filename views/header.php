@@ -34,6 +34,12 @@
 				font-size: 12px;
 				text-decoration: none;
 			}
+			.no_content_found {
+				background: url('../images/no_content_found.png');
+                background-size: cover;
+                width: 100%;
+                height: 100%;
+            }
 			.notifications {
 				border: 1px solid #faebcc;
 				border-radius: 4px;

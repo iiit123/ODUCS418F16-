@@ -32,7 +32,11 @@
 						<h4> Recent Questions  </h4> <hr/>
 					<?php } ?>
 					
-					<?php 
+					<?php if(!isset($questions)) { ?>
+						<div style="width:80%; height:60%;">
+							<div class="no_content_found"></div>
+						</div>
+					<?php } else {
 						foreach($questions as $row) {
 							$created_at = date('d-M-Y', strtotime($row['created_at']));
 							$tags = explode(',', $row['tags']);
@@ -61,7 +65,7 @@
 							views  <?php echo $row['views']; ?>
 						</div>
 					</div>
-				<?php } ?>
+				<?php } }?>
 				</div>
 				<div class="col-md-3 col-md-offset-1" style="margin-top:10px;">
 					<div class="panel panel-default">
