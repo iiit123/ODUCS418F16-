@@ -1,5 +1,8 @@
+<?php include '../config.php'; ?>
+<?php if($USER_ID != undefined ) {
+    header('location: ./home_page.php');
+}?> 
 <?php include('header.php');?>
-
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
 
         <style>
@@ -21,13 +24,24 @@
 
     <title> LOGIN PAGE </title>
 
+    <div class="row">
+        <div class="col-md-3">
+            <a id="back_link" href="./home_page.php" style="margin-left:12px;line-height:50px;color:#eee;font-size:15px;text-decoration:none;"> 
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                BACK TO CONNECT 
+            </a>
+        </div>
+    </div>
     <div class="container">    
-        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+        <div id="loginbox" style="margin-top:10%;display:none;opacity:0.98" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <form action="../actions/login.php" method="post" id="login_form" class="form-horizontal" role="form">
+
             <div class="panel panel-default" >
                     <div class="panel-heading">
                         <div class="panel-title">Sign In</div>
 <!--                         <div style="float:right; font-size: 80%; position: relative; top:-17px"><a href="#">Forgot password?</a></div>
  -->                    </div>     
+
 
                     <div style="padding-top:30px" class="panel-body" >
                         
@@ -37,7 +51,6 @@
                                 </div>';
                         }?>
 
-                        <form action="../actions/login.php" method="post" id="login_form" class="form-horizontal" role="form">
                                     
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -49,15 +62,7 @@
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                 <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required>
                             </div>
-                            <p id="login_password_error" style="display:none;" class="text-danger">Password length should be more than 5 <p>        
-
-
-                                <div style="margin-top:10px" class="form-group">
-                                    <div class="col-sm-12 controls">
-                                      <button id="btn-login" href="#" class="btn btn-success"> <i class="fa fa-sign-in"></i>  &nbsp; Login  </button>
-                                    </div>
-                                </div>
-
+                            <p id="login_password_error" style="display:none;" class="text-danger">Password length should be more than 5 </p>        
 
                                 <!-- <div class="form-group">
                                     <div class="col-md-12 control">
@@ -69,11 +74,14 @@
                                         </div>
                                     </div>
                                 </div>  -->   
-                            </form>     
-                        </div>                     
+                        </div> 
+                        <div class="panel-footer">
+                            <button id="btn-login" class="btn btn-primary"> <i class="fa fa-sign-in"></i>  &nbsp; Login  </button>
+                        </div>
                     </div>  
+            </form>     
         </div>
-        <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <!--   <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title">Sign Up</div>
@@ -113,7 +121,7 @@
                             </form>
                          </div>
                     </div>        
-         </div> 
+         </div>  -->
     </div>
     
 
@@ -123,6 +131,16 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
+
+                var error = '<?php echo $_GET["error_login"];?>';
+
+                var timer = (error == 'invalid') ? 0 : 1000;
+
+                console.log(timer);                
+
+                $('#back_link').animate({ marginLeft: "0%"} , timer+200);
+
+                $('#loginbox').slideDown(timer);
 
                 $('.alert').fadeOut(1500);
 
