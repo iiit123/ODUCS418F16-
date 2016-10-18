@@ -120,6 +120,7 @@
 <script type="text/javascript">
 	var ques_id = <?php echo $_GET['ques_id']; ?>;
 	var user_id = <?php echo $USER_ID;?>;
+	var tags = <?php print_r(json_encode($tags));?>;
 	var name = '<?php echo $_SESSION["name"] ;?>'; 
 </script>
 <script type="text/javascript" src="../js/individual_question.js"></script>

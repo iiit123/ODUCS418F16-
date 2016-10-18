@@ -59,6 +59,12 @@ $(document).ready(function() {
 
 	$('.ans_success').hide();
 
+	$.each(tags, function(key, tag){
+		$.get('../actions/get/get_tag_related_questions.php', {'tag':tag}, function(response){
+			console.log(response);
+		})
+	});
+
 	$.get('../actions/get/get_like_details.php', {'ques_id': ques_id}, function(response) {
 		if(response['like_flag'] == 1) {
 			$('.up_vote').addClass('text-success');
@@ -196,6 +202,7 @@ $(document).ready(function() {
 			});
 		}
 	});
+
 
 	$('.edit').click(function() {
 		edit_content(this);
