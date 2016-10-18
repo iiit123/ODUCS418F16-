@@ -86,11 +86,12 @@ $(document).ready(function() {
 	$(".answer_submit").click(function(e) {
 
 		var result = check_length($('#text_editor'), 30, "Answer must be atleast 30 characters");
-
 		if(result) {
 			e.preventDefault();
 			$.post('../actions/insert/insert_answer.php', {'ques_id': ques_id, 'answer': $('#text_editor').val()}, function(response) {
 				if(response) {
+					var string = '</br><i class="fa fa-check fa-2x correct" aria-hidden="true"></i><input type="hidden" class="hidden_id" value="'+response+'" />'
+					var correct_tick = (asker_id == user_id)? string: '';
 					$('#ans_count').text(parseInt($('#ans_count').text())+1);
 					$('.ans_success').show().fadeOut(1600);
 					$('.answer_container').append('<hr/><div class="row">'
@@ -98,12 +99,12 @@ $(document).ready(function() {
 								// +'<i class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>'
 								// +'<p class="help-block likes_count"> 0 </p>'
 								// +'<i class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i> <br/>  </br>'
-								+'</br> <i class="fa fa-check fa-2x correct" aria-hidden="true"></i>'
+								+correct_tick
 							+'</div>'
 							+'<div class="col-md-10">'
 								+'<p>'+$('#text_editor').val()+'</p>'
 								+'<p><span>'
-									+'<a href="#"> <i style="color:black;" class="fa fa-user" aria-hidden="true"></i>'+name+'</a>'
+									+'<a href="#"> <i style="color:black;" class="fa fa-user" aria-hidden="true"></i>&nbsp;'+name+'</a>'
 								+'</span><span class="pull-right">'
 									+'<i class="fa fa-calendar" aria-hidden="true"></i> '
 									+ get_current_date()
@@ -187,7 +188,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$('.correct').click(function() {
+	$('body').on('click', '.correct' ,function() {
 		var _this = this;
 		var hasClass = $(this).hasClass('text-success');
 		var ans_id = $(this).siblings('.hidden_id').val();

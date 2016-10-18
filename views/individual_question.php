@@ -63,17 +63,15 @@
 						<hr/>
 						<div class="row">
 							<div class="col-md-1 text-center">
-								<!--	<i class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>
-									<p class="help-block likes_count"> 100 </p>
-									<i class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i>--> <br/> 
-									<?php if($answer['is_correct'] && $asker_id == $USER_ID) { ?>
-										<i class="fa fa-check fa-2x correct text-success" aria-hidden="true"></i>
-									<?php } else if($answer['is_correct'] && $asker_id != $USER_ID) {?>
-										<i class="fa fa-check fa-2x text-success" style="cursor:default;"aria-hidden="true"></i>
-									<?php } elseif($asker_id == $USER_ID) { ?>
-											<i class="fa fa-check fa-2x correct" aria-hidden="true"></i>			
-									<?php }?>
-									<input type="hidden" class="hidden_id" value="<?php echo $answer['ans_id'];?>" />
+								 <br/> 
+								<?php if($answer['is_correct'] && $asker_id == $USER_ID) { ?>
+									<i class="fa fa-check fa-2x correct text-success" aria-hidden="true"></i>
+								<?php } else if($answer['is_correct'] && $asker_id != $USER_ID) {?>
+									<i class="fa fa-check fa-2x text-success" style="cursor:default;"aria-hidden="true"></i>
+								<?php } elseif($asker_id == $USER_ID) { ?>
+									<i class="fa fa-check fa-2x correct" aria-hidden="true"></i>			
+								<?php }?>
+								<input type="hidden" class="hidden_id" value="<?php echo $answer['ans_id'];?>" />
 							</div>
 							<div class="col-md-10">
                             	<p><?php echo decode_data($answer['answer']); ?></p>
@@ -120,6 +118,7 @@
 <script type="text/javascript">
 	var ques_id = <?php echo $_GET['ques_id']; ?>;
 	var user_id = <?php echo $USER_ID;?>;
+	var asker_id = <?php echo $asker_id;?>;
 	var tags = <?php print_r(json_encode($tags));?>;
 	var name = '<?php echo $_SESSION["name"] ;?>'; 
 </script>
