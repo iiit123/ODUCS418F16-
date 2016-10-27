@@ -20,7 +20,7 @@ function check_email(email) {
  */
 function check_length(_this, length, string) {
 
-	var value = _this.val();
+	var value = $(_this).val();
     if(value.length >= length) {
     	if(_this.siblings('.text-danger').length != 0) {
     		_this.siblings('.text-danger').hide();
@@ -29,7 +29,8 @@ function check_length(_this, length, string) {
     }
     
     if(_this.siblings('.text-danger').length == 0) {
-    	_this.after('<p style="margin-top:5px;" class="text-danger">' + string+ '</p>');
+    	_this.parent().after('<p style="margin-top:5px;" class="text-danger">' + string+ '</p>');
+        _this.parent().next().fadeOut(1500);
     }
 
     return false;

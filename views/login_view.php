@@ -64,7 +64,7 @@
                             </div>
                             <p id="login_password_error" style="display:none;" class="text-danger">Password length should be more than 5 </p>        
 
-                                <!-- <div class="form-group">
+                                <div class="form-group">
                                     <div class="col-md-12 control">
                                         <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                                             Don't have an account! 
@@ -73,7 +73,7 @@
                                         	</a>
                                         </div>
                                     </div>
-                                </div>  -->   
+                                </div>    
                         </div> 
                         <div class="panel-footer">
                             <button id="btn-login" class="btn btn-primary"> <i class="fa fa-sign-in"></i>  &nbsp; Login  </button>
@@ -81,13 +81,19 @@
                     </div>  
             </form>     
         </div>
-      <!--   <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div id="signupbox" style="display:none; margin-top:10%;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <form action="../actions/signup.php" method="post" id="login_form" class="form-horizontal" role="form">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title">Sign Up</div>
                             <div style="float:right; font-size: 85%; position: relative; top:-17px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
                         </div>  
                         <div class="panel-body" >
+                              <?php if(isset($_GET['error_signup'])) {
+                                    echo '<div class="alert alert-danger">
+                                        User alert exits!. Please login to continue.
+                                    </div>';
+                                }?>
                             <form method="post" id="signupform" class="form-horizontal" role="form">
                                 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
@@ -103,26 +109,25 @@
                                     
                                      <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                        <input id="signup-fullname" type="text" class="form-control" name="name" placeholder="full name" required/>
+                                        <input id="signup-name" type="text" class="form-control" name="name" placeholder="full name" required/>
                                     </div>
-                                    <p id="signup_fullname_error" style="display:none;" class="text-danger">Full name length should be more than 5 <p>
                                     
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input id="signup-password" type="password" class="form-control" name="password" placeholder="password" required/>
                                 </div>
-                                <p id="signup_password_error" style="display:none;" class="text-danger">Password length should be more than 5 <p>
                                 
                                 <div class="form-group">
                                     <div class="col-md-4">
-                                        <button id="btn-signup" type="button" class="btn btn-success"><i class="fa fa-user-plus"></i> &nbsp; Sign Up</button>
+                                        <button id="btn-signup" name="signup" type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> &nbsp; Sign Up</button>
                                     </div>
                                 </div>
                             </form>
                          </div>
                     </div>        
-         </div>  -->
-    </div>
+                </div> 
+            </form>
+        </div>
     
 
 
@@ -172,24 +177,19 @@
                     var fullname = $('#signup-fullname').val();
 
                     var email_result =  check_email(email);
-                    var password_result = check_length(password, 5);
-                    var fullname_result = check_length(name, 5);
+                    var password_result = check_length($('#signup-password'), 5, 'Password length should be more than 5');
+                    var name_result = check_length($('#signup-name'), 5, 'Password length should be more than 5');
 
                     if(!email_result) {
                         $('#signup_email_error').show().fadeOut(3000);
+                    }
+                    var result = email_result && name_result && password_result;
+                    if(!result) {
                         e.preventDefault();
                     }
-                    if(!password_result) {
-                        $('#signup_password_error').show().fadeOut(3000);
-                        e.preventDefault();
-                    }
-                    if(!fullname_result) {
-                        $('#signup_fullname_error').show().fadeOut(3000);
-                        e.preventDefault();
-                    }
-
-                    return email_result && fullname_result && password_result;
-
+                    console.log(result);
+                    return result;
+                    
 
                 });
 

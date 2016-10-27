@@ -45,20 +45,33 @@
                 </li>
             	</ul>
 
+
               <div class="col-sm-3 col-md-4">
-                  <form action="./home_page.php" method="get" class="navbar-form" role="search">
-                      <div class="input-group" style="width:100%;">
-                          <input type="text" class="form-control" placeholder="Search for a tag" name="tag">
-                          <div class="input-group-btn">
-                              <button class="btn btn-default" type="submit">
+                 <div class="form-group">
+                    <form action="./home_page.php" method="get" class="navbar-form" role="search">
+                      <div class="input-group">
+                        <div class="input-group-btn" >
+                            <div class="btn-group"> 
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                    <span data-bind="label" id="searchLabel">
+                                        <i class="fa fa-tags" aria-hidden="true"></i>
+                                    </span> <span class="caret"></span>
+                                </button> 
+                                <ul style="min-width:0px; width:55px;" class="dropdown-menu" role="menu">
+                                    <li><a href="#"><i class="fa fa-users" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>  
+                        <input id="search_content" placeholder="search for tags" name="tag" class="form-control" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary btn-block" type="submit">
                                 GO!
-                              </button>
-                          </div>
+                            </button>
+                        </span>
                       </div>
-                  </form>
+                    </form>
+                 </div>
               </div>
-
-
           		
               <ul class="nav navbar-nav navbar-right login-btns">
                 <?php if(!isset($_SESSION['user_id'])) { ?>
@@ -72,8 +85,10 @@
                   ?>
 
                   <span style="margin-right:25px;">
-                    <i style="color:grey;" class="fa fa-user" aria-hidden="true"></i>
-                    <?php echo $USERNAME; ?> 
+                    <a href="./profile_page.php?name=<?php echo $USERNAME; ?>">
+                      <i style="color:grey;" class="fa fa-user" aria-hidden="true"></i>
+                      <?php echo $USERNAME; ?>
+                    </a>
                   </span>
                   <a href="../actions/logout.php">
                     <button class="btn btn-danger">
