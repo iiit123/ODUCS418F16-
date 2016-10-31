@@ -1,10 +1,14 @@
 <?php include('../config.php'); ?>
 <?php include('header.php'); ?>
 <?php include('navbar.php'); ?>
+<?php include('../actions/get/get_user_asked_questions.php'); ?>
+<?php include('../actions/get/get_user_star_questions.php'); ?>
+<?php include('../actions/get/get_user_answered_questions.php'); ?>
+
 <title> Profile Page </title>
+
 <div class="main_container container">
 	<div class="row">
-		<h3><?php echo $_GET['name']; ?></h3> <br/>
 		<ul class="nav nav-tabs">
 			<li class="active">
 				<a data-toggle="tab" href="#home">
@@ -33,20 +37,118 @@
 		</ul>
 		<div class="tab-content">
 		    <div id="home" class="tab-pane fade in active">
-		      <h3>HOME</h3>
-		      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+		      		<?php include('./edit_profile.php');?>
 		    </div>
 		    <div id="menu1" class="tab-pane fade">
-		      <h3>Menu 1</h3>
-		      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<ul style="list-style-type:disc; padding-left:20px;">
+		      		<?php
+		      		if(isset($user_asked_questions)) {
+		      			foreach ($user_asked_questions as $key => $row) { 
+		      				$created_at = date('d-M-Y', strtotime($row['created_at']));
+							$tags = explode(',', $row['tags']);
+							?>
+				      		<p> <a href="./individual_question.php?ques_id=<?php echo $row['ques_id'];?>"><?php echo $row['title']; ?></a> </p>
+							<div style="margin-bottom:30px;" class="row">
+								<div class="col-md-5">
+									<?php foreach($tags as $key => $tag) {?>
+										<a class="no_underline" href="./home_page.php?tag=<?php echo $tag ?>">
+											<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
+										</a>
+									<?php }?>
+								</div>
+								<div class="col-md-2">
+									<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+									votes  <?php echo $row['likes_count'];?>
+								</div>
+								<div class="col-md-3">
+									<i class="fa fa-file-text-o" aria-hidden="true"></i>
+									answers count  <?php echo $row['answers_count'];?>
+								</div>
+								<div class="col-md-2">
+									<i class="fa fa-eye" aria-hidden="true"></i>
+									views  <?php echo $row['views']; ?>
+								</div>
+							</div>
+		      			<?php }
+		      		}
+		      		else { ?>
+		      			You have not asked any question yet.
+		      		<?php } ?>
+		      	</ul>
 		    </div>
 		    <div id="menu2" class="tab-pane fade">
-		      <h3>Menu 2</h3>
-		      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+		  		<ul style="list-style-type:disc; padding-left:20px;">
+		      		<?php
+		      		if(isset($user_answered_questions)) {
+		      			foreach ($user_answered_questions as $key => $row) { 
+		      				$created_at = date('d-M-Y', strtotime($row['created_at']));
+							$tags = explode(',', $row['tags']);
+							?>
+							<p> <a href="./individual_question.php?ques_id=<?php echo $row['ques_id'];?>"><?php echo $row['title']; ?></a> </p>
+							<div style="margin-bottom:30px;" class="row">
+								<div class="col-md-5">
+									<?php foreach($tags as $key => $tag) {?>
+										<a class="no_underline" href="./home_page.php?tag=<?php echo $tag ?>">
+											<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
+										</a>
+									<?php }?>
+								</div>
+								<div class="col-md-2">
+									<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+									votes  <?php echo $row['likes_count'];?>
+								</div>
+								<div class="col-md-3">
+									<i class="fa fa-file-text-o" aria-hidden="true"></i>
+									answers count  <?php echo $row['answers_count'];?>
+								</div>
+								<div class="col-md-2">
+									<i class="fa fa-eye" aria-hidden="true"></i>
+									views  <?php echo $row['views']; ?>
+								</div>
+							</div>
+		      			<?php }
+		      		}
+		      		else { ?>
+						You have not answered any questions		      		
+					<?php } ?>
+		      	</ul>
 		    </div>
 		    <div id="menu3" class="tab-pane fade">
-		      <h3>Menu 3</h3>
-		      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+		      <ul style="list-style-type:disc; padding-left:20px;">
+		     	 <?php
+		      		if(isset($user_star_questions)) {
+		      			foreach ($user_star_questions as $key => $row) { 
+		      				$created_at = date('d-M-Y', strtotime($row['created_at']));
+							$tags = explode(',', $row['tags']);
+							?>
+							<p> <a href="./individual_question.php?ques_id=<?php echo $row['ques_id'];?>"><?php echo $row['title']; ?></a> </p>
+							<div style="margin-bottom:30px;" class="row">
+								<div class="col-md-5">
+									<?php foreach($tags as $key => $tag) {?>
+										<a class="no_underline" href="./home_page.php?tag=<?php echo $tag ?>">
+											<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
+										</a>
+									<?php }?>
+								</div>
+								<div class="col-md-2">
+									<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+									votes  <?php echo $row['likes_count'];?>
+								</div>
+								<div class="col-md-3">
+									<i class="fa fa-file-text-o" aria-hidden="true"></i>
+									answers count  <?php echo $row['answers_count'];?>
+								</div>
+								<div class="col-md-2">
+									<i class="fa fa-eye" aria-hidden="true"></i>
+									views  <?php echo $row['views']; ?>
+								</div>
+							</div>
+		      			<?php }
+		      		}
+		      		else { ?>
+		      			You have not marked any questions as favourite.	
+		      		<?php } ?>
+		      	</ul>
 		    </div>
 		</div>
 	</div>

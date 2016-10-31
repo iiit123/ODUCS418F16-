@@ -1,18 +1,29 @@
 <?php
 	
-	include('../../config.php');
+	$filename = "../../config.php";
+	if (file_exists($filename)) {
+		include('../../config.php');
+	}
 
-	$name = $_GET['name'];
+	$name = $_GET['name']; 
+	$match_case = isset($_GET['match_case']);
 
-	$sql = "SELECT user_id, name FROM users WHERE name like '$name%'";
+	if($match_case) {
+		$sql = "SELECT * FROM users WHERE name like '$name%'";
+	}
+	else {
+		$sql = "SELECT * FROM users WHERE name like '$name'";
+	}
 
 	$result = $db->query($sql);
-	$details = [];
+	$user_details = [];
 	if($result->num_rows > 0) {
 		while($row = $result->fetch_array(MYSQLI_ASSOC)) {
-			$details[] = $row;
+			$user_details[] = $row;
 		}
-		echo json_encode($details);
+		if($match_case) {
+			echo json_encode($user_details);
+		}
 	}
 	else {
 		$error = "something went wrong";

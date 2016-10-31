@@ -66,17 +66,34 @@ $(document).ready(function() {
 	// });
 
 	$.get('../actions/get/get_like_details.php', {'ques_id': ques_id}, function(response) {
-		if(response['like_flag'] == 1) {
-			$('.up_vote').addClass('text-success');
-		}
-		else if(response['like_flag'] == -1) {
-			$('.down_vote').addClass('text-danger');
-		}
 
-		if(response['star_flag'] == 1) {
-			$('.favourite').addClass('text-warning');
-		}
+		console.log(response)
+		$.each(response, function(index, value){
 
+			if(value['ans_id']==null) {
+				if(value['like_flag'] == 1) {
+					$('#question_upvote').addClass('text-success');
+				}
+				else if(value['like_flag'] == -1) {
+					$('#question_downvote').addClass('text-danger');
+				}
+				if(value['star_flag'] == 1) {
+					$('.favourite').addClass('text-warning');
+				}
+			}
+			else {	
+				if(value['like_flag'] == 1) {
+					var id = "#ans_upvote_"+value['ans_id'];
+					console.log(id);
+					$(id).addClass('text-success');
+				}
+				else if(value['like_flag'] == -1) {
+					var id = "#ans_downvote_"+value['ans_id'];
+					$(id).addClass('text-danger');
+				}
+			}
+
+		});
 	}, 'json');
 
 	$('#text_editor').summernote({
@@ -120,17 +137,26 @@ $(document).ready(function() {
 
 	$('.fa-thumbs-up').click(function() {
 		var _this = this;
+		var bool_ans_vote = $(this).hasClass('answer_vote');
+
 		if(user_id == undefined) {
-			$('.message').html('Please login to perform this !').show().fadeOut(2000);
+			$(this).parent().siblings('.content').find('.message').html('Please login to perform this !').show().fadeOut(2000);
 		}
 		else {
-			$.post('../actions/update/update_likes_count.php', {'ques_id': ques_id, 'user_id': user_id, 'like_flag': 1}, function(response) {
+			if(bool_ans_vote){
+				var post_url = "../actions/update/update_ans_likes_count.php"
+				var data = {'ques_id': ques_id, 'user_id': user_id, 'like_flag': 1, 'ans_id':$(this).siblings('.ans_id_input').val()} 
+			} else{
+				var post_url = "../actions/update/update_likes_count.php"
+				var data = {'ques_id': ques_id, 'user_id': user_id, 'like_flag': 1} 
+			} 
+			$.post(post_url, data, function(response) {
 								
 				if(response >1) {
-					$('.message').html('You have already liked this post').show().fadeOut(2000);
+					$(_this).parent().siblings('.content').find('.message').html('You have already liked this post').show().fadeOut(2000);
 				}
 				else if(response < -1) {
-					$('.message').html('You have already unliked this post').show().fadeOut(2000);
+					$(_this).parent().siblings('.content').find('.message').html('You have already unliked this post').show().fadeOut(2000);
 				}
 				else if(response == 1) {
 					update_likes_counter(_this, 1);
@@ -148,17 +174,25 @@ $(document).ready(function() {
 
 	$('.fa-thumbs-down').click(function() {
 		var _this = this;
+		var bool_ans_vote = $(this).hasClass('answer_vote');
 		if(user_id == undefined) {
-			$('.message').html('Please login to perform this !').show().fadeOut(2000);
+			$(this).parent().siblings('.content').find('.message').html('Please login to perform this !').show().fadeOut(2000);
 		}
 		else {
-			$.post('../actions/update/update_likes_count.php', {'ques_id': ques_id, 'user_id': user_id, 'like_flag': -1}, function(response) {
+			if(bool_ans_vote){
+				var post_url = "../actions/update/update_ans_likes_count.php"
+				var data = {'ques_id': ques_id, 'user_id': user_id, 'like_flag': -1, 'ans_id':$(this).siblings('.ans_id_input').val()} 
+			} else{
+				var post_url = "../actions/update/update_likes_count.php"
+				var data = {'ques_id': ques_id, 'user_id': user_id, 'like_flag': -1} 
+			} 
+			$.post(post_url, data, function(response) {
 				
 				if(response >1) {
-					$('.message').html('You have already liked this post').show().fadeOut(2000);
+					$(_this).parent().siblings('.content').find('.message').html('You have already liked this post').show().fadeOut(2000);
 				}
 				else if(response < -1) {
-					$('.message').html('You have already unliked this post').show().fadeOut(2000);
+					$(_this).parent().siblings('.content').find('.message').html('You have already unliked this post').show().fadeOut(2000);
 				}
 				else if(response == -1){
 					update_likes_counter(_this, -1);

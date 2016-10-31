@@ -47,7 +47,7 @@
 
 
               <div class="col-sm-3 col-md-4">
-                 <div class="form-group">
+                 <div style="margin-bottom:0px;" class="form-group">
                     <form action="./home_page.php" method="get" class="navbar-form" role="search">
                       <div class="input-group">
                         <div class="input-group-btn" >
@@ -62,7 +62,7 @@
                                 </ul>
                             </div>
                         </div>  
-                        <input id="search_content" placeholder="search for tags" name="tag" class="form-control" />
+                        <input id="search_content" data-provide="typeahead" autocomplete="off" placeholder="search for tags" name="tag" class="typeahead form-control" />
                         <span class="input-group-btn">
                             <button class="btn btn-primary btn-block" type="submit">
                                 GO!
@@ -82,11 +82,14 @@
           			  </button>
                 </a>
                 <?php } else {   
+                  $image_url = "../images/profile_pictures/".$USERNAME;
+                  if(!file_exists($image_url)) {
+                    $image_url = "../images/profile_icon.png";
+                  }
                   ?>
-
                   <span style="margin-right:25px;">
                     <a href="./profile_page.php?name=<?php echo $USERNAME; ?>">
-                      <i style="color:grey;" class="fa fa-user" aria-hidden="true"></i>
+                      <img width="35" height="35" src = "<?php echo $image_url;?>" />
                       <?php echo $USERNAME; ?>
                     </a>
                   </span>

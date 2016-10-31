@@ -14,23 +14,24 @@
 				<div class="col-md-9">
 					<div style="margin-bottom:30px;" class="row">
 						<div class="col-md-1 text-center">
-							<i class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>
+							<i id="question_upvote" class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>
 							<p class="help-block likes_count"> <?php echo $likes_count; ?> </p>
-							<i class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i> <br/> </br>
+							<i id="question_downvote" class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i> <br/> </br>
 							<i class="fa fa-star fa-2x favourite" aria-hidden="true"></i>
 						</div>
-						<div class="col-md-10">
+						<div class="col-md-10 content">
 							<p style="display:none;" class="question_warning alert alert-warning message"></p>
 							<?php echo '<span class="content">'.$question.'</span>'; ?>	
 							<p>
 
 								<?php
 								if($tags!="") { 
-								foreach($tags as $key => $tag) {?>
+									foreach($tags as $key => $tag) {?>
 									<a class="no_underline" href="./home_page.php?tag=<?php echo $tag ?>">
 										<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
 									</a>
-								<?php }}?>
+								<?php }
+								}?>
 								<span style="margin-left:30px;" class="pull-right">
 									<i class="fa fa-calendar" aria-hidden="true"></i>
 									<?php echo $created_at ;?>
@@ -42,7 +43,13 @@
 							</p>
 							</br>
 							<p>
-								<a href="#"> <i style="color:black;" class="fa fa-user" aria-hidden="true"></i> <?php echo $name ;?> </a>
+								<?php 
+								 $image_url = "../images/profile_pictures/".$name;
+				                  if(!file_exists($image_url)) {
+				                    $image_url = "../images/profile_icon.png";
+				                  }
+				                ?>
+								<a href="./profile_page.php?name=<?php echo $name ;?>"> <img width="30" height="30" src="<?php echo $image_url;?>"/> <?php echo $name ;?> </a>
 								<a style="margin-left:25px;" class="link pull-right" href="#"> report abuse </a>
 								<a class="edit link pull-right" href="#">edit </a> &nbsp;
 								<a class="done link pull-right" style="display: none;" href="#">done </a> &nbsp;	
@@ -63,7 +70,11 @@
 						<hr/>
 						<div class="row">
 							<div class="col-md-1 text-center">
-								 <br/> 
+								<input class="ans_id_input" type="hidden" value="<?php echo $answer['ans_id'] ?>" />
+								<i id="ans_upvote_<?php echo $answer['ans_id'];?>"class="fa fa-thumbs-up fa-2x up_vote answer_vote" aria-hidden="true"></i>
+								<p class="help-block likes_count"><?php echo $answer['likes_count'];?></p>
+								<i id="ans_downvote_<?php echo $answer['ans_id'];?>" class="fa fa-thumbs-down fa-2x down_vote answer_vote" aria-hidden="true"></i> <br/> </br>
+
 								<?php if($answer['is_correct'] && $asker_id == $USER_ID) { ?>
 									<i class="fa fa-check fa-2x correct text-success" aria-hidden="true"></i>
 								<?php } else if($answer['is_correct'] && $asker_id != $USER_ID) {?>
@@ -73,11 +84,18 @@
 								<?php }?>
 								<input type="hidden" class="hidden_id" value="<?php echo $answer['ans_id'];?>" />
 							</div>
-							<div class="col-md-10">
+							<div class="col-md-10 content">
+								<p style="display:none;" class="alert alert-warning message"></p>
                             	<p><?php echo decode_data($answer['answer']); ?></p>
 								<p>
+									<?php 
+										$image_url = "../images/profile_pictures/".$answer['name'];
+						                if(!file_exists($image_url)) {
+						                   $image_url = "../images/profile_icon.png";
+						                }
+					                ?>
 									<span>
-										<a href="#"> <i style="color:black;" class="fa fa-user" aria-hidden="true"></i> <?php echo $answer['name'] ;?> </a>
+										<a href="./profile_page.php?name=<?php echo $answer['name'];?>"> <img width="30" height="30" src="<?php echo $image_url;?>"/> <?php echo $answer['name'] ;?> </a>
 									</span>
 									<span class="pull-right">
 										<i class="fa fa-calendar" aria-hidden="true"></i>
