@@ -36,6 +36,16 @@ function check_length(_this, length, string) {
     return false;
 }
 
+function get_url_params(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
+
 /**
  * Gets the current date.
  *

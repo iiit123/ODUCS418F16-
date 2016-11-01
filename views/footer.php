@@ -13,7 +13,7 @@
 				}
 			});
 
-			$(".dropdown-menu li a").click(function() {
+			$(".search_dropdown li a").click(function() {
 				var active_class_name = $(this).parents(".btn-group").find('.fa').attr('class');
 				var clicked_class_name = $(this).find('.fa').attr('class');
 

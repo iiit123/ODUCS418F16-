@@ -29,7 +29,18 @@
                     <?php if(isset($_GET['tag'])) { ?>
 						<h4> <?php echo $_GET['tag'];?> Questions  </h4> <hr/>
 					<?php } else { ?>
-						<h4> Top Questions  </h4> <hr/>
+						<h4> <span id="q_type_heading"> Top Questions </span>
+								<span class="dropdown pull-right">
+								  <button class="btn select_question_type btn-default dropdown-toggle" type="button" data-toggle="dropdown">Select type
+								  <span class="caret"></span></button>
+								  <ul class="dropdown-menu menu_questions_type">
+								  	<li><a id="All Questions" class="question_type" href="#">All Questions</a></li>
+								    <li><a id="Top Questions" class="question_type" href="#">Top Questions</a></li>
+								    <li><a id="Recent Questions" class="question_type" href="#">Recent Questions</a></li>
+								   </ul>
+								</span>
+						</h4>
+						<hr/>
 					<?php } ?>
 					
 					<?php if(!isset($questions)) { ?>
@@ -90,6 +101,28 @@
 	<script type="text/javascript">
 			$(document).ready(function () {
 				$('.alert').fadeOut(1600);
+
+				var type = decodeURIComponent($.trim(get_url_params('type')));
+
+
+			    if(type){
+			    	$('#q_type_heading').text(type);
+					$(".select_question_type:first-child").text(type);
+				    $(".select_question_type:first-child").val(type);
+			    }
+
+				$(".menu_questions_type li a").click(function() {
+			    	$(".select_question_type:first-child").text($(this).text());
+			    	$(".select_question_type:first-child").val($(this).text());
+				});
+
+				$(".question_type").click(function() {
+					var type = $(this).text();
+					window.location.href = "./home_page.php?type=" + type;
+				});
+
 			});
+
+		
 	</script>
 <?php include('footer.php') ?>

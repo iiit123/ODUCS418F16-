@@ -7,7 +7,7 @@
 	define('DB_SERVER', 'localhost');
  	define('DB_USERNAME', 'admin');
  	define('DB_PASSWORD', 'M0n@rch$');
- 	define('DB_DATABASE', 'milestone1dump');
+ 	define('DB_DATABASE', 'milestone2dump');
  	$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 
 	session_start();
@@ -98,6 +98,9 @@
   }
 
   function upload_image($file_name) {
+
+    //Source: W3 Schools.
+
     $target_dir = "../../images/profile_pictures/";
     $uploadOk = 1;
     $imageFileType = pathinfo(basename($_FILES["file"]["name"]),PATHINFO_EXTENSION);

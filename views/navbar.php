@@ -57,7 +57,7 @@
                                         <i class="fa fa-tags" aria-hidden="true"></i>
                                     </span> <span class="caret"></span>
                                 </button> 
-                                <ul style="min-width:0px; width:55px;" class="dropdown-menu" role="menu">
+                                <ul style="min-width:0px; width:55px;" class="dropdown-menu search_dropdown" role="menu">
                                     <li><a href="#"><i class="fa fa-users" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
