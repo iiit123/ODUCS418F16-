@@ -62,6 +62,14 @@
   	return $data;
   }
 
+  function encode_array_to_html($db, $data_array) {
+    $new_data_array = [];
+    foreach($data_array as $key => $value) {
+      $new_data_array[$key] = trim_data($db, $value);
+    }
+    return $new_data_array;
+  }
+
   function get_user_id($db, $name) {
 
     $sql = "SELECT user_id FROM users WHERE name like '$name'";

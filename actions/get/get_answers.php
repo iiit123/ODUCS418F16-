@@ -2,7 +2,7 @@
 
 	$ques_id = $_GET['ques_id'];
 	
-	$sql = "SELECT *, answers.created_at from answers INNER JOIN users ON answers.user_id=users.user_id where ques_id = '". $ques_id ."' ORDER BY is_correct DESC";
+	$sql = "SELECT *, answers.created_at from answers INNER JOIN users ON answers.user_id=users.user_id where ques_id = '". $ques_id ."' ORDER BY is_correct DESC, likes_count DESC";
 
 	$result = $db->query($sql);
    

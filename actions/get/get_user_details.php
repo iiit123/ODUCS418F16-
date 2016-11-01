@@ -19,7 +19,7 @@
 	$user_details = [];
 	if($result->num_rows > 0) {
 		while($row = $result->fetch_array(MYSQLI_ASSOC)) {
-			$user_details[] = $row;
+			$user_details[] = encode_array_to_html($db, $row);
 		}
 		if($match_case) {
 			echo json_encode($user_details);

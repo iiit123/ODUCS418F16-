@@ -137,20 +137,25 @@
 
             $(document).ready(function() {
 
-                var error = '<?php echo $_GET["error_login"];?>';
+                if ((window.location.href).indexOf("error_signup=user_exists") >= 0) {
+                    $('#signupbox').show();
+                    $('#loginbox').hide();
+                }
+                else {
 
-                var timer = (error == 'invalid') ? 0 : 1000;
+                    var error = '<?php echo $_GET["error_login"];?>';
 
-                console.log(timer);                
+                    var timer = (error == 'invalid') ? 0 : 1000;
 
-                $('#back_link').animate({ marginLeft: "0%"} , timer+200);
+                    $('#back_link').animate({ marginLeft: "0%"} , timer+200);
 
-                $('#loginbox').slideDown(timer);
+                    $('#loginbox').slideDown(timer);
 
-                $('.alert').fadeOut(1500);
+                    $('.alert').fadeOut(1500);
 
-                $('#login_email_error').hide();
-                $('#login_password_error').hide();
+                    $('#login_email_error').hide();
+                    $('#login_password_error').hide();
+                }
 
 //                 $('#btn-login').click(function(e) {
 //                     var email = $('#login-email').val(); 

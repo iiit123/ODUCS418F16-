@@ -113,9 +113,10 @@ $(document).ready(function() {
 					$('.ans_success').show().fadeOut(1600);
 					$('.answer_container').append('<hr/><div class="row">'
 							+'<div class="col-md-1 text-center">'
-								// +'<i class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>'
-								// +'<p class="help-block likes_count"> 0 </p>'
-								// +'<i class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i> <br/>  </br>'
+								+'<input class="ans_id_input" type="hidden" value="'+response+'" />'
+								+'<i id="ans_upvote_'+response +'" class="fa fa-thumbs-up answer_vote fa-2x up_vote" aria-hidden="true"></i>'
+								+'<p class="help-block likes_count"> 0 </p>'
+								+'<i id="ans_downvote_'+response +'" class="fa fa-thumbs-down answer_vote fa-2x down_vote" aria-hidden="true"></i> <br/>  </br>'
 								+correct_tick
 							+'</div>'
 							+'<div class="col-md-10">'
@@ -135,7 +136,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$('.fa-thumbs-up').click(function() {
+	$('body').on('click', '.fa-thumbs-up', function() {
 		var _this = this;
 		var bool_ans_vote = $(this).hasClass('answer_vote');
 
@@ -172,7 +173,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$('.fa-thumbs-down').click(function() {
+	$('body').on('click', '.fa-thumbs-down', function() {
 		var _this = this;
 		var bool_ans_vote = $(this).hasClass('answer_vote');
 		if(user_id == undefined) {

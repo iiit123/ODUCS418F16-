@@ -29,7 +29,7 @@
                     <?php if(isset($_GET['tag'])) { ?>
 						<h4> <?php echo $_GET['tag'];?> Questions  </h4> <hr/>
 					<?php } else { ?>
-						<h4> Recent Questions  </h4> <hr/>
+						<h4> Top Questions  </h4> <hr/>
 					<?php } ?>
 					
 					<?php if(!isset($questions)) { ?>

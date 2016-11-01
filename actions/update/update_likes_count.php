@@ -8,7 +8,7 @@
 	$like_flag = $_POST['like_flag'];
 	
 
-	$sql = "SELECT like_flag from likes where ques_id ='".$ques_id."' AND user_id ='".$user_id ."'";
+	$sql = "SELECT like_flag from likes where ques_id ='".$ques_id."' AND user_id ='".$user_id ."' and ans_id is NULL";
 	$result = $db->query($sql);
 	if($result->num_rows > 0) {
 		$row = $result->fetch_array(MYSQLI_ASSOC);
@@ -22,7 +22,7 @@
 			exit;
 		}
 		else {
-			$sql = "UPDATE likes SET like_flag='".$new_like_flag."'WHERE ques_id='".$ques_id."'";
+			$sql = "UPDATE likes SET like_flag='".$new_like_flag."'WHERE ques_id='".$ques_id."' and ans_id is NULL";
 			if ($db->query($sql) === TRUE) {
 				$sql = "UPDATE questions SET likes_count=likes_count+$like_flag WHERE ques_id='".$ques_id."'";
 				if($db->query($sql)){

@@ -1,6 +1,6 @@
 <?php
 	
-	$sql = "SELECT * from questions";
+	$sql = "SELECT * from questions order by likes_count desc";
 
 	$result = $db->query($sql);
 	$questions = [];

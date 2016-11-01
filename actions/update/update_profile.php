@@ -11,11 +11,16 @@
 	    if($_FILES['file']['error'] != UPLOAD_ERR_NO_FILE){
 			$message = upload_image($name);
 			$_SESSION['upload_message'] = $message;
-		}        
+		} 
+		else {
+			$_SESSION['upload_message'] = "Your profile has been successfully updated";
+		}       
     }
     else {
-         echo "Error: " . $sql . "<br>" . $db->error;
+         $_SESSION['upload_message'] = "Error: " . $sql . "<br>" . $db->error;
     }
+   header('location: ../../views/profile_page.php?name='.$name);
+
     
-	header('location: ../../views/profile_page.php?name='.$name);
+	
 ?>
