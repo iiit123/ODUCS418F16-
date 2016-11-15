@@ -7,7 +7,7 @@
 	$type = trim($_GET['type']);
 
 	if($type == "All Questions") {
-		$sql = "SELECT * from questions";
+		$sql = "SELECT * from questions where deleted_at is NULL";
 
 		$result = $db->query($sql);
 		$questions = [];
@@ -21,7 +21,7 @@
 		}
 	}
 	else if($type == "Recent Questions"){
-		$sql = "SELECT * from questions order by created_at DESC";
+		$sql = "SELECT * from questions where deleted_at is NULL order by created_at DESC";
 
 		$result = $db->query($sql);
 		$questions = [];
@@ -35,7 +35,7 @@
 		}
 	}
 	else if ($type == "Top Questions" || !$type) {
-		$sql = "SELECT * from questions order by likes_count desc LIMIT 5";
+		$sql = "SELECT * from questions where deleted_at is NULL order by likes_count desc LIMIT 5";
 
 		$result = $db->query($sql);
 		$questions = [];
