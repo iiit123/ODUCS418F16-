@@ -4,7 +4,7 @@
 	$name = trim_data_login($db, $_POST['name']);
 	$password = trim_data_login($db, $_POST['password']);
 
-	$sql = "SELECT user_id, name FROM users WHERE name = '$name' and password = '$password'";
+	$sql = "SELECT user_id, name, is_admin FROM users WHERE name = '$name' and password = '$password'";
  
     $result = mysqli_query($db,$sql);
 
@@ -16,6 +16,7 @@
      	  
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['name'] = $row['name'];
+        $_SESSION['admin'] = $row['is_admin'];
         
         header("location: ../views/home_page.php?login=success");
     }

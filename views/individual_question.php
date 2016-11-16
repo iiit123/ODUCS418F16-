@@ -75,11 +75,11 @@
 								<p class="help-block likes_count"><?php echo $answer['likes_count'];?></p>
 								<i id="ans_downvote_<?php echo $answer['ans_id'];?>" class="fa fa-thumbs-down fa-2x down_vote answer_vote" aria-hidden="true"></i> <br/> </br>
 
-								<?php if($answer['is_correct'] && $asker_id == $USER_ID) { ?>
+								<?php if($answer['is_correct'] && $asker_id == $USER_ID && $freeze_flag != 1) { ?>
 									<i class="fa fa-check fa-2x correct text-success" aria-hidden="true"></i>
-								<?php } else if($answer['is_correct'] && $asker_id != $USER_ID) {?>
+								<?php } else if($answer['is_correct'] && ($asker_id != $USER_ID  || $freeze_flag ==1 )) {?>
 									<i class="fa fa-check fa-2x text-success" style="cursor:default;"aria-hidden="true"></i>
-								<?php } elseif($asker_id == $USER_ID) { ?>
+								<?php } elseif($asker_id == $USER_ID && $freeze_flag!=1) { ?>
 									<i class="fa fa-check fa-2x correct" aria-hidden="true"></i>			
 								<?php }?>
 								<input type="hidden" class="hidden_id" value="<?php echo $answer['ans_id'];?>" />
@@ -107,6 +107,7 @@
 						<?php }} ?>
 					</div>
 					</br></br>
+					<?php if($freeze_flag != 1) { ?>
 					<div class="row">
 						<h4> Your Answer </h4> <hr/>
 						<div class="col-md-12">
@@ -122,6 +123,7 @@
 							</button>
 						</div>
 					</div>
+					<?php } ?>
 				</div>
 				<div class="col-md-3">
 					<h4 style="margin-top:0px;"> Related <span style="font-size:10px;margin-left:10px;"class="pointer label label-info">Next Update</span> </h4> <hr/>

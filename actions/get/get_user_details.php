@@ -8,7 +8,10 @@
 	$name = $_GET['name']; 
 	$match_case = isset($_GET['match_case']);
 
-	if($match_case) {
+	if(!isset($_GET['name'])) {
+		$sql = "SELECT count(ques_id) as questions_count, users.user_id, name, email, users.created_at from users LEFT JOIN questions on questions.user_id = users.user_id GROUP BY users.user_id";
+	}
+	else if($match_case) {
 		$sql = "SELECT * FROM users WHERE name like '$name%'";
 	}
 	else {

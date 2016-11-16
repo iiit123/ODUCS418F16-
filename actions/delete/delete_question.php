@@ -7,9 +7,9 @@
 
 	$sql = "UPDATE questions SET deleted_at='".$mysql_date_now."' WHERE ques_id='".$ques_id."'";
 	if ($db->query($sql) === TRUE) {
-		return true;
+		echo true;
 	} 
 	else {
-		return false;
+		echo false;
 	}
 ?>

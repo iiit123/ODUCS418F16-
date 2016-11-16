@@ -2,7 +2,7 @@
 	
 	$ques_id = $_GET['ques_id'];
 
-	$sql = "SELECT *,questions.created_at as created_at from questions INNER JOIN users ON questions.user_id=users.user_id where ques_id='".$ques_id."'";
+	$sql = "SELECT *,questions.created_at as created_at from questions INNER JOIN users ON questions.user_id=users.user_id where questions.deleted_at is NULL and ques_id='".$ques_id."'";
 
 	$result = $db->query($sql);
 	$ques = "";
@@ -22,6 +22,7 @@
 		$name = $row['name'];
 		$likes_count = $row['likes_count'];
 		$created_at = date('d-M-Y', strtotime($row['created_at']));
+		$freeze_flag = $row['freeze_flag'];
 	
 		$tags = explode(',', $tags);
 	}
