@@ -58,9 +58,7 @@
 					<div style="margin-bottom:30px;" class="row">
 						<div class="col-md-5">
 							<?php foreach($tags as $key => $tag) {?>
-								<a class="no_underline" href="./home_page.php?tag=<?php echo $tag ?>">
-									<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
-								</a>
+								<a class="no_underline" href="./home_page.php?tag=<?php echo trim($tag); ?>"><span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span></a>
 							<?php }?>
 						</div>
 						<div class="col-md-2">
@@ -84,7 +82,7 @@
 					<div class="panel panel-default">
   						<div class="panel-heading">
   							<i class="fa fa-line-chart" aria-hidden="true"></i>
-  							Trending Tags <span style="margin-left:10px;"class="pointer label label-info">Next Update</span>
+  							Trending Tags <span style="margin-left:10px;" class="pointer label label-info">Next Update</span>
   						</div>
   						<div class="panel-body">
   							<ul class="list-group">

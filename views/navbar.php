@@ -29,7 +29,7 @@
           <span class="icon-bar"></span>
         </button>
  			  <a class="navbar-brand" href="home_page.php">
- 			   		<img class="logo" src="../images/logo.png" />
+ 			   		<img alt="logo" class="logo" src="../images/logo.png" />
  			   		<span class="logo_text"> CONNECT </span>
  			  </a>
   		</div>
@@ -76,12 +76,14 @@
     		
         <ul class="nav navbar-nav navbar-right login-btns">
           <?php if(!isset($_SESSION['user_id'])) { ?>
-    			<a href="./login_view.php">
-            <button class="btn btn-primary">
-    			  	<i class="fa fa-sign-in" aria-hidden="true"></i>
-    			  	LOG IN 
-    			  </button>
-          </a>
+    			<li>
+            <a href="./login_view.php">
+              <button class="btn btn-primary">
+      			  	<i class="fa fa-sign-in" aria-hidden="true"></i>
+      			  	LOG IN 
+      			  </button>
+            </a>
+          </li>
           <?php } else {   
             $image_url = "../images/profile_pictures/".$USERNAME;
             if(!file_exists($image_url)) {

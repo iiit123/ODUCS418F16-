@@ -57,7 +57,8 @@
 				                    $image_url = "../images/profile_icon.png";
 				                  }
 				                ?>
-								<a href="./profile_page.php?name=<?php echo $name ;?>"> <img width="30" height="30" src="<?php echo $image_url;?>"/> <?php echo $name ;?> </a>
+								<a href="./profile_page.php?name=<?php echo $name ;?>"> <img width="30" height="30" src="<?php echo $image_url;?>"/> <?php echo $name ;?></a> <i style="color:gold" class="fa fa-circle" aria-hidden="true"></i>
+<?php echo get_user_score($db, $asker_id);?>
 								<a style="margin-left:25px;" class="link pull-right" href="#"> report abuse </a>
 								<a class="edit link pull-right" href="#">edit </a> &nbsp;
 								<a class="done link pull-right" style="display: none;" href="#">done </a> &nbsp;	
@@ -103,7 +104,8 @@
 						                }
 					                ?>
 									<span>
-										<a href="./profile_page.php?name=<?php echo $answer['name'];?>"> <img width="30" height="30" src="<?php echo $image_url;?>"/> <?php echo $answer['name'] ;?> </a>
+										<a href="./profile_page.php?name=<?php echo $answer['name'];?>"> <img width="30" height="30" src="<?php echo $image_url;?>"/> <?php echo $answer['name'] ;?> </a><i style="color:gold" class="fa fa-circle" aria-hidden="true"></i>
+<?php echo get_user_score($db, $answer['user_id']);?>
 									</span>
 									<span class="pull-right">
 										<i class="fa fa-calendar" aria-hidden="true"></i>

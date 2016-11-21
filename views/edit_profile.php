@@ -66,7 +66,9 @@
         </div>
         <div class="panel-body">
           <p> 
-
+            <span class="no-padding-left col-md-10"> <i class="fa fa-line-chart" aria-hidden="true"></i>  &nbsp;User Score</span> <?php echo get_user_score($db, get_user_id($db, $_GET['name']));?>
+          </p>
+          <p> 
             <span class="no-padding-left col-md-10"> <i class="fa fa-question" style="color:#d9534f;" aria-hidden="true"></i> &nbsp;Questions asked</span> <?php echo count($user_asked_questions);?>
           </p>
           <p> 
