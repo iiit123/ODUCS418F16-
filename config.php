@@ -71,7 +71,6 @@
   }
 
   function get_user_id($db, $name) {
-
     $sql = "SELECT user_id FROM users WHERE name like '$name'";
     $result = $db->query($sql);
     if($result->num_rows > 0) {
@@ -81,6 +80,22 @@
     }
     else {
       return null;
+    }
+  }
+
+  function get_user_score($db, $user_id) {
+    $sql = "SELECT sum(likes_count) as score from questions where user_id=".$user_id;
+    $result = $db->query($sql);
+    if($result->num_rows > 0) {
+      $row = $result->fetch_array(MYSQLI_ASSOC);
+      $score = $row['score'];
+      if($score == NULL){
+        return 0;
+      }
+      return $score;
+    }
+    else{
+      return 0;
     }
   }
 

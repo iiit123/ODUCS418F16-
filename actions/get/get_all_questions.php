@@ -7,8 +7,12 @@
 	$type = trim($_GET['type']);
 
 	if($type == "All Questions") {
-		$sql = "SELECT * from questions where deleted_at is NULL";
+		$page_number = 1;
+		if(isset($_GET['page_number'])) {
+			$page_number = $_GET['page_number'];
+		}
 
+		$sql = "SELECT * from questions where deleted_at is NULL LIMIT ".(($page_number-1)*5).", 5";
 		$result = $db->query($sql);
 		$questions = [];
 		if($result->num_rows > 0) {
@@ -21,7 +25,7 @@
 		}
 	}
 	else if($type == "Recent Questions"){
-		$sql = "SELECT * from questions where deleted_at is NULL order by created_at DESC";
+		$sql = "SELECT * from questions where deleted_at is NULL order by created_at DESC LIMIT 5";
 
 		$result = $db->query($sql);
 		$questions = [];

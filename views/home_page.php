@@ -77,6 +77,8 @@
 						</div>
 					</div>
 				<?php } }?>
+					<div class="row pagination_row">
+					</div>
 				</div>
 				<div class="col-md-3 col-md-offset-1" style="margin-top:10px;">
 					<div class="panel panel-default">
@@ -100,6 +102,63 @@
 	<?php include('script_files');?>
 	<script type="text/javascript">
 			$(document).ready(function () {
+
+				var type = decodeURIComponent($.trim(get_url_params('type')));
+
+				var current_page = parseInt(decodeURIComponent($.trim(get_url_params('page_number'))));
+				if(!current_page) {
+					current_page = 1;
+				}
+
+				if(type == "All Questions") {
+
+					$.get('../actions/get/get_questions_count.php', function(response) {
+						var questions_count = response['questions_count'];
+						var pagination_li = "";
+
+						var pagination_col = "";
+						i=0;
+						for(i=current_page-1;i<current_page + 2, i<questions_count/5; i++) {
+							if(i+1 == current_page) {
+								pagination_col += '<li id="page_number_'+(i+1)+'" class="active pagination_number"><a href="./home_page?type=All Questions&page_number='+ (i+1) +'">'+ (i+1) +'</a></li>';
+							}
+							else {
+								pagination_col += '<li id="page_number_'+(i+1)+'" class="pagination_number"><a href="./home_page?type=All Questions&page_number='+ (i+1) +'">'+ (i+1) +'</a></li>';
+							}
+						}
+						var pagination_col_before = '<div class="col-md-6 col-md-offset-4"><ul class="pagination">'
+						if(current_page == 1) {
+							pagination_col_before += '<li class="disabled previous"><a>Previous</a></li>';
+
+						}
+						else {
+							pagination_col_before += '<li class="previous"><a href="./home_page?type=All Questions&page_number='+ eval(current_page-1) +'">Previous</a></li>';
+						}
+						var pagination_col_after = "";
+						if(current_page >= questions_count/5){
+							pagination_col_after += '<li class="disabled next"><a>Next</a></li></ul></div>';
+
+						}
+						else {
+							pagination_col_after += '<li class="next"><a href="./home_page?type=All Questions&page_number='+ eval(current_page+1) +'">Next</a></li></ul></div>';
+
+						}
+						pagination_col = pagination_col_before + pagination_col + pagination_col_after;
+
+						$('.pagination_row').after(pagination_col);
+					}, 'json');
+
+					$('body').on('click', '.pagination_number', function() {
+						$('.pagination_number').removeClass('active');
+						$(this).addClass('active');
+					});
+
+					$('.previous, .next').click(function() {
+						$('.pagination_number').removeClass('active');
+					});
+				}
+
+
 				$('.alert').fadeOut(1600);
 
 				var type = decodeURIComponent($.trim(get_url_params('type')));

@@ -20,7 +20,4 @@
          $_SESSION['upload_message'] = "Error: " . $sql . "<br>" . $db->error;
     }
    header('location: ../../views/profile_page.php?name='.$name);
-
-    
-	
 ?>

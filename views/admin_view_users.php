@@ -1,10 +1,10 @@
 <?php include('../config.php'); ?>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" crossorigin="anonymous">
 <?php 
 	if(isset($_SESSION['admin']) != 1){
         header('location:page_not_found.php');
     }
 ?> 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" crossorigin="anonymous">
 <?php include('../actions/get/get_user_details.php');?>
 <?php include('header.php'); ?>
 <?php include('navbar.php'); ?>
@@ -19,6 +19,7 @@
 		                <th>Name</th>
 		                <th>Email</th>
 		                <th>Question Asked</th>
+		                <th>Score</th>
 		                <th>Joined on</th>
 		            </tr>
 		        </thead>
@@ -33,6 +34,7 @@
 								<td><?php echo $row['name'];?></td>
 								<td><?php echo $row['email'];?></td>
 								<td><?php echo $row['questions_count'];?></td>
+								<td><?php echo get_user_score($db, $row['user_id']);?></td>
 								<td><?php echo $created_at;?></td>
 							</tr>
 		        	<?php } } ?>

@@ -2,59 +2,56 @@
 <?php include('header.php'); ?>
 <?php include('navbar.php'); ?>
 
-	<div class="main_container container">
-			<div class="row">
-
-				<div class="col-md-9">
-
-					<?php if(!isset($_SESSION['user_id'])) {?>
-						<div class="alert alert-danger">
-							please login to continue !
-						</div>
-					<?php } ?>
-
-
-				<?php if($USER_ID != undefined) { ?>
-				<form action="../actions/insert/insert_question.php" method="post">
-				<?php } ?>
- 					<div class="form-group">
-    					<input type="text" class="form-control" name="title" id="title" placeholder="Ask your question. Be specific.">
-  					</div>
-					<textarea name="question" id="text_editor"></textarea>
-					 <div class="form-group">
-    					<input type="text" class="form-control" name="tags" id="tags" placeholder="Enter the tags for the question seperated by comma (,)">
-  					</div>
-
-  						<?php if(!isset($_SESSION['user_id'])) {?>
-							<button class="btn btn-primary" disabled> 
-						<?php }  else {?>
-							<button class="submit_ques btn btn-primary"> 
-						<?php } ?>
-							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
- 							Post Your Question 
- 						</button>
-					</div>
-				<?php if($USERID != undefined) { ?>
-				</form>
-				<?php }?>
-
-				<!-- how it works section -->
-				<div class="col-md-2 col-md-offset-1">
-					<p class="p-center">
-						<img src = "../images/question.png"/> 
-						<span class="help-block"> Questions ??? </span>
-					</p>
-					<p class="p-center"> 
-						<img src = "../images/ask_question.png"/> 
-						<span class="help-block"> Ask question </span>
-					</p>
-					<p class="p-center"> 
-						<img src = "../images/idea.png"/> 
-						<span class="help-block"> Get the solution </span>
-					</p>
+<div class="main_container container">
+	<div class="row">
+		<div class="col-md-9">
+			<?php if(!isset($_SESSION['user_id'])) {?>
+				<div class="alert alert-danger">
+					please login to continue !
 				</div>
-			</div>
+			<?php } ?>
+
+			<?php if($USER_ID != undefined) { ?>
+			<form action="../actions/insert/insert_question.php" method="post">
+			<?php } ?>
+					<div class="form-group">
+					<input type="text" class="form-control" name="title" id="title" placeholder="Ask your question. Be specific.">
+					</div>
+				<textarea name="question" id="text_editor"></textarea>
+				 <div class="form-group">
+					<input type="text" class="form-control" name="tags" id="tags" placeholder="Enter the tags for the question seperated by comma (,)">
+					</div>
+
+						<?php if(!isset($_SESSION['user_id'])) {?>
+						<button class="btn btn-primary" disabled> 
+					<?php }  else {?>
+						<button class="submit_ques btn btn-primary"> 
+					<?php } ?>
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+							Post Your Question 
+						</button>
+			<?php if($USERID != undefined) { ?>
+			</form>
+			<?php }?>
 		</div>
+
+		<!-- how it works section -->
+		<div class="col-md-2 col-md-offset-1">
+			<p class="p-center">
+				<img src = "../images/question.png"/> 
+				<span class="help-block"> Questions ??? </span>
+			</p>
+			<p class="p-center"> 
+				<img src = "../images/ask_question.png"/> 
+				<span class="help-block"> Ask question </span>
+			</p>
+			<p class="p-center"> 
+				<img src = "../images/idea.png"/> 
+				<span class="help-block"> Get the solution </span>
+			</p>
+		</div>
+	</div>
+</div>
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
 		<style>
 			.p-center {

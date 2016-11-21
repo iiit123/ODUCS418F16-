@@ -34,9 +34,11 @@
 								<td><?php echo $row['title'];?></td>
 								<td><?php echo $created_at;?></td>
 								<td>
-									<button class="btn btn-primary edit">
+									<a href="./admin_edit_question.php?ques_id=<?php echo $row['ques_id'];?>">
+										<button class="btn btn-primary edit">
 										<i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;Edit
-									</button>
+										</button>
+									</a>
 								</td>
 								<td>
 									<?php if($row['freeze_flag'] == 0) { ?>

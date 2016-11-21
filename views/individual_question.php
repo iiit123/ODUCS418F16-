@@ -106,6 +106,17 @@
 						</div>
 						<?php }} ?>
 					</div>
+					<div class="row">
+						<div class="col-md-6 col-md-offset-4">
+							<ul class="pagination">
+							  <li><a href="#">Previous</a></li>
+							  <li><a href="#">1</a></li>
+							  <li><a href="#">2</a></li>
+							  <li><a href="#">3</a></li>
+							  <li><a href="#">Next</a></li>
+							</ul>
+						</div>
+					</div>
 					</br></br>
 					<?php if($freeze_flag != 1) { ?>
 					<div class="row">
