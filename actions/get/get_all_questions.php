@@ -4,7 +4,9 @@
 		include('../../config.php');
 	}
 	
-	$type = trim($_GET['type']);
+	if(isset($_GET['type'])) {
+		$type = trim($_GET['type']);
+	}
 
 	if($type == "All Questions") {
 		$page_number = 1;
@@ -24,6 +26,22 @@
 			unset($questions);
 		}
 	}
+
+	else if($type == "Admin All Questions"){
+		$sql = "SELECT * from questions where deleted_at is NULL order by created_at DESC";
+
+		$result = $db->query($sql);
+		$questions = [];
+		if($result->num_rows > 0) {
+			while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+				$questions[] = $row;
+			}
+		}
+		else {
+			unset($questions);
+		}
+	}
+
 	else if($type == "Recent Questions"){
 		$sql = "SELECT * from questions where deleted_at is NULL order by created_at DESC LIMIT 5";
 

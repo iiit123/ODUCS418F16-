@@ -1,8 +1,15 @@
 <?php 
 
 	$ques_id = $_GET['ques_id'];
-	
-	$sql = "SELECT *, answers.created_at from answers INNER JOIN users ON answers.user_id=users.user_id where ques_id = '". $ques_id ."' ORDER BY is_correct DESC, likes_count DESC";
+
+	if(!isset($_GET['page_number'])) {
+		$page_number = 1;
+	}
+	else {
+		$page_number = $_GET['page_number'];
+	} 
+
+	$sql = "SELECT *, answers.created_at from answers INNER JOIN users ON answers.user_id=users.user_id where ques_id = '". $ques_id ."' ORDER BY is_correct DESC, likes_count DESC LIMIT ".(($page_number-1)*5).", 5";
 
 	$result = $db->query($sql);
    
@@ -10,7 +17,6 @@
 		while($row = $result->fetch_array(MYSQLI_ASSOC)) {
 			$answers[] = $row;
 		}
-		$answers_count = count($answers);
 	}
 
     else {

@@ -4,6 +4,14 @@
 <?php include('../actions/get/get_answers.php'); ?>
 <?php include('header.php'); ?>
 <?php include('navbar.php'); ?>
+<?php 
+	if(!isset($_GET['page_number'])) {
+		$page_number = 1;
+	}
+	else {
+		$page_number = $_GET['page_number'];
+	} 
+?>
 
 <?php update_question_views($db, $_GET['ques_id']); ?>
 	    <title> INDIVIDUAL QUESTION PAGE </title>
@@ -109,11 +117,32 @@
 					<div class="row">
 						<div class="col-md-6 col-md-offset-4">
 							<ul class="pagination">
-							  <li><a href="#">Previous</a></li>
-							  <li><a href="#">1</a></li>
-							  <li><a href="#">2</a></li>
-							  <li><a href="#">3</a></li>
-							  <li><a href="#">Next</a></li>
+
+								<?php 
+									if($answers_count != 0) { 
+										if($page_number-1 <= 0) {?>
+							 	 	<li class="disabled"><a>Previous</a></li>
+							 	 <?php } else { ?>
+							 	 	<li><a href="./individual_question.php?ques_id=<?php echo $_GET['ques_id']?>&page_number=<?php echo $page_number-1;?>">Previous</a></li>
+							 	 <?php } }?>
+
+							  	<?php for($i=$page_number-1; $i<$answers_count+2, $i<($answers_count/5); $i++) {
+									if($i+1 == $page_number) {
+							 	 		echo '<li class="active">';
+							 	 	}
+							 	 	else {
+							 	 		echo '<li>';
+							 	 }?>
+							 	 <a href="./individual_question.php?ques_id=<?php echo $_GET['ques_id']?>&page_number=<?php echo $i+1;?>"><?php echo $i+1; ?></a></li>
+							  <?php }?>
+							 
+							    <?php
+							    	if($answers_count !=0 ) {  
+							    		if($page_number >= $answers_count/5) {?>
+							 	 			<li class="disabled"><a>Next</a></li>
+							 	 		<?php } else { ?>
+							 	 	<li><a href="./individual_question.php?ques_id=<?php echo $_GET['ques_id']?>&page_number=<?php echo $page_number+1;?>">Next</a></li>
+							 	<?php } }?>
 							</ul>
 						</div>
 					</div>

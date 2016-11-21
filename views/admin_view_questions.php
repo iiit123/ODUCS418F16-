@@ -5,6 +5,7 @@
     }
 ?> 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" crossorigin="anonymous">
+<?php $type="Admin All Questions";?>
 <?php include('../actions/get/get_all_questions.php');?>
 <?php include('header.php'); ?>
 <?php include('navbar.php'); ?>

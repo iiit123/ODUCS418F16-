@@ -10,7 +10,8 @@
 	<div class="row">
 		<div class="col-md-9">
 			<legend><h3>Edit Question</h3></legend>
-			<form action="../actions/insert/insert_question.php" method="post">
+			<form action="../actions/update/update_question.php" method="post">
+				<input type="hidden" name="ques_id" value="<?php echo $_GET['ques_id'];?>"/>
 				<div class="form-group">
 					<input type="text" class="form-control" name="title" id="title" placeholder="Ask your question. Be specific.">
 				</div>

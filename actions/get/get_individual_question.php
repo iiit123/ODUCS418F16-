@@ -28,6 +28,7 @@
 		$likes_count = $row['likes_count'];
 		$created_at = date('d-M-Y', strtotime($row['created_at']));
 		$freeze_flag = $row['freeze_flag'];	
+		$answers_count = $row['answers_count'];
 	
 		$tags = explode(',', $tags);
 

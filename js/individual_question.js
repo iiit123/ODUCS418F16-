@@ -9,6 +9,8 @@ function update_likes_counter(_this, value) {
 	$(_this).siblings('.likes_count').text(likes_count);
 }
 
+
+
 /**
  * { edit question change to textarea }
  *
