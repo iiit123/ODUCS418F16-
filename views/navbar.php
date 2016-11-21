@@ -29,7 +29,7 @@
           <span class="icon-bar"></span>
         </button>
  			  <a class="navbar-brand" href="home_page.php">
- 			   		<img class="logo" src="../images/logo.png" />
+ 			   		<img alt="logo" class="logo" src="../images/logo.png" />
  			   		<span class="logo_text"> CONNECT </span>
  			  </a>
   		</div>
