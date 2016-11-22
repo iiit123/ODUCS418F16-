@@ -5,7 +5,7 @@
 	$user_id = get_user_id($db, $name);
 
 	if($user_id) {
-		$sql = "SELECT * from questions RIGHT JOIN answers on answers.ques_id=questions.ques_id where answers.user_id='$user_id'";
+		$sql = "SELECT * from questions RIGHT JOIN answers on answers.ques_id=questions.ques_id where answers.user_id='$user_id' and questions.deleted_at is NULL";
 
 		print $sql;
 

@@ -84,11 +84,27 @@
   }
 
   function get_user_score($db, $user_id) {
-    $sql = "SELECT sum(likes_count) as score from questions where user_id=".$user_id;
+    $sql = "SELECT sum(likes_count) as score from questions where user_id=".$user_id." and deleted_at is NULL";
     $result = $db->query($sql);
     if($result->num_rows > 0) {
       $row = $result->fetch_array(MYSQLI_ASSOC);
       $score = $row['score'];
+      if($score == NULL){
+        return 0;
+      }
+      return $score;
+    }
+    else{
+      return 0;
+    }
+  }
+
+  function get_user_asked_questions_count($db, $user_id) {
+    $sql = "SELECT count(ques_id) as count from questions where user_id=".$user_id." and deleted_at is NULL GROUP BY user_id";
+    $result = $db->query($sql);
+    if($result->num_rows > 0) {
+      $row = $result->fetch_array(MYSQLI_ASSOC);
+      $score = $row['count'];
       if($score == NULL){
         return 0;
       }

@@ -6,7 +6,7 @@
 
 	if($user_id) {
 
-		$sql = "SELECT * from questions RIGHT JOIN likes on likes.ques_id=questions.ques_id where likes.user_id='$user_id' and star_flag=1";
+		$sql = "SELECT * from questions RIGHT JOIN likes on likes.ques_id=questions.ques_id where likes.user_id='$user_id' and star_flag=1 and questions.deleted_at is null";
 
 		$result = $db->query($sql);
 		$user_star_questions = [];

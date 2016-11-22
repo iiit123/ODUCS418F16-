@@ -33,7 +33,7 @@
 								<td class="ques_id"><?php echo $row['user_id'];?></td>
 								<td><?php echo $row['name'];?></td>
 								<td><?php echo $row['email'];?></td>
-								<td><?php echo $row['questions_count'];?></td>
+								<td><?php echo get_user_asked_questions_count($db, $row['user_id']);?></td>
 								<td><?php echo get_user_score($db, $row['user_id']);?></td>
 								<td><?php echo $created_at;?></td>
 							</tr>

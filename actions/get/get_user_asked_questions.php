@@ -5,7 +5,7 @@
 	$user_id = get_user_id($db, $name);
 	
 	if($user_id) {
-		$sql = "SELECT * from questions where user_id='$user_id'";
+		$sql = "SELECT * from questions where user_id='$user_id' and deleted_at is NULL";
 
 		$result = $db->query($sql);
 		$user_asked_questions = [];
