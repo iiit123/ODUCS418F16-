@@ -29,7 +29,7 @@
 						<div class="col-md-1 text-center">
 							<i id="question_upvote" class="fa fa-thumbs-up fa-2x up_vote" aria-hidden="true"></i>
 							<p class="help-block likes_count"> <?php echo $likes_count; ?> </p>
-							<i id="question_downvote" class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i> <br/> </br>
+							<i id="question_downvote" class="fa fa-thumbs-down fa-2x down_vote" aria-hidden="true"></i> <br/> <br/>
 							<i class="fa fa-star fa-2x favourite" aria-hidden="true"></i>
 						</div>
 						<div class="col-md-10 content">
@@ -40,7 +40,7 @@
 								<?php
 								if($tags!="") { 
 									foreach($tags as $key => $tag) {?>
-									<a class="no_underline" href="./home_page.php?tag=<?php echo $tag ?>">
+									<a class="no_underline" href="./home_page.php?tag=<?php echo trim($tag) ?>">
 										<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo trim($tag);?></span>
 									</a>
 								<?php }
@@ -54,7 +54,7 @@
 									views - <?php echo $views; ?>
 								</span>		
 							</p>
-							</br>
+							<br/>
 							<p>
 								<?php 
 								 $image_url = "../images/profile_pictures/".$name;
@@ -87,7 +87,7 @@
 								<input class="ans_id_input" type="hidden" value="<?php echo $answer['ans_id'] ?>" />
 								<i id="ans_upvote_<?php echo $answer['ans_id'];?>"class="fa fa-thumbs-up fa-2x up_vote answer_vote" aria-hidden="true"></i>
 								<p class="help-block likes_count"><?php echo $answer['likes_count'];?></p>
-								<i id="ans_downvote_<?php echo $answer['ans_id'];?>" class="fa fa-thumbs-down fa-2x down_vote answer_vote" aria-hidden="true"></i> <br/> </br>
+								<i id="ans_downvote_<?php echo $answer['ans_id'];?>" class="fa fa-thumbs-down fa-2x down_vote answer_vote" aria-hidden="true"></i> <br/> <br/>
 
 								<?php if($answer['is_correct'] && $asker_id == $USER_ID && $freeze_flag != 1) { ?>
 									<i class="fa fa-check fa-2x correct text-success" aria-hidden="true"></i>
@@ -153,7 +153,7 @@
 							</ul>
 						</div>
 					</div>
-					</br></br>
+					<br/><br/>
 					<?php if($freeze_flag != 1) { ?>
 					<div class="row">
 						<h4> Your Answer </h4> <hr/>
@@ -173,7 +173,7 @@
 					<?php } ?>
 				</div>
 				<div class="col-md-3">
-					<h4 style="margin-top:0px;"> Related <span style="font-size:10px;margin-left:10px;"class="pointer label label-info">Next Update</span> </h4> <hr/>
+					<h4 style="margin-top:0px;"> Related <span style="font-size:10px;margin-left:10px;" class="pointer label label-info">Next Update</span> </h4> <hr/>
 					<p><a class="link"> C++11 trailing return member function using decltype and constness </a> </p>
 					<p> <a class="link"> Trailing return types, decltype and const-ness </a></p>
 				</div>

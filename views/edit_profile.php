@@ -51,7 +51,7 @@
         <p> 
           <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;
           <a href="mailto:#"><?php echo $details['email'];?></a>
-        </p></br>
+        </p><br/>
         <p>
           <i class="fa fa-file-text-o" aria-hidden="true"></i>
           <?php echo $details['about_me'];?>
