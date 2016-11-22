@@ -2,7 +2,14 @@
 <?php if($USER_ID != undefined ) {
     header('location: ./home_page.php');
 }?> 
-<?php include('header.php');?>
+<?php 
+    ob_start();
+    include("header.php");
+    $buffer=ob_get_contents();
+    ob_end_clean();
+    $buffer=str_replace("%TITLE%","LOGIN PAGE",$buffer);
+    echo $buffer;
+?>
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
 
         <style>

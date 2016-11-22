@@ -4,13 +4,18 @@
 	header("Pragma: no-cache");
 ?>
 <?php include('../config.php'); ?>
-<?php include('header.php'); ?>
+<?php 
+	ob_start();
+    include("header.php");
+    $buffer=ob_get_contents();
+    ob_end_clean();
+    $buffer=str_replace("%TITLE%","PROFILE PAGE",$buffer);
+    echo $buffer;
+?>
 <?php include('navbar.php'); ?>
 <?php include('../actions/get/get_user_asked_questions.php'); ?>
 <?php include('../actions/get/get_user_star_questions.php'); ?>
 <?php include('../actions/get/get_user_answered_questions.php'); ?>
-
-<title> Profile Page </title>
 
 <div class="main_container container">
 	<div class="row">
@@ -45,7 +50,8 @@
 		      		<?php include('./edit_profile.php');?>
 		    </div>
 		    <div id="menu1" class="tab-pane fade">
-				<ul style="list-style-type:disc; padding-left:20px;">
+				<ul style="padding-left:20px;" class="list-unstyled">
+					<li>
 		      		<?php
 		      		if(isset($user_asked_questions)) {
 		      			foreach ($user_asked_questions as $key => $row) { 
@@ -56,7 +62,7 @@
 							<div style="margin-bottom:30px;" class="row">
 								<div class="col-md-5">
 									<?php foreach($tags as $key => $tag) {?>
-										<a class="no_underline" href="./home_page.php?tag=<?php echo $tag ?>">
+										<a class="no_underline" href="./home_page.php?tag=<?php echo trim($tag) ?>">
 											<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
 										</a>
 									<?php }?>
@@ -77,12 +83,14 @@
 		      			<?php }
 		      		}
 		      		else { ?>
-		      			You have not asked any question yet.
+		      				You have not asked any question yet.
 		      		<?php } ?>
+		      		</li>
 		      	</ul>
 		    </div>
 		    <div id="menu2" class="tab-pane fade">
-		  		<ul style="list-style-type:disc; padding-left:20px;">
+		  		<ul style="padding-left:20px;" class="list-unstyled">
+		  			<li>
 		      		<?php
 		      		if(isset($user_answered_questions)) {
 		      			foreach ($user_answered_questions as $key => $row) { 
@@ -114,12 +122,14 @@
 		      			<?php }
 		      		}
 		      		else { ?>
-						You have not answered any questions		      		
+		      				You have not answered any questions	
 					<?php } ?>
+					</li>
 		      	</ul>
 		    </div>
 		    <div id="menu3" class="tab-pane fade">
-		      <ul style="list-style-type:disc; padding-left:20px;">
+		      <ul style="padding-left:20px;" class="list-unstyled">
+		      	<li>
 		     	 <?php
 		      		if(isset($user_star_questions)) {
 		      			foreach ($user_star_questions as $key => $row) { 
@@ -135,6 +145,7 @@
 										</a>
 									<?php }?>
 								</div>
+
 								<div class="col-md-2">
 									<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
 									votes  <?php echo $row['likes_count'];?>
@@ -151,8 +162,9 @@
 		      			<?php }
 		      		}
 		      		else { ?>
-		      			You have not marked any questions as favourite.	
+		      				You have not marked any questions as favourite.	
 		      		<?php } ?>
+		      		</li>
 		      	</ul>
 		    </div>
 		</div>

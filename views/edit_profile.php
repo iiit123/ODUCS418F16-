@@ -10,7 +10,7 @@
           $image_url = "../images/profile_icon.png";
         } ?>
 
-        <div class="panel-body"><img width="100%" src="<?php echo $image_url;?>"/></div>
+        <div class="panel-body"><img alt="user_profile_pic" style="width:100%;" src="<?php echo $image_url;?>"/></div>
         <div class="panel-footer">
           <?php echo $_GET['name']; ?>
         </div>
@@ -26,24 +26,24 @@
       <?php if($_SESSION['name']== $_GET['name']) {?>
         <form action="../actions/update/update_profile.php" method="post" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label>Email address</label>
             <input name="email" type="email" class="form-control" value="<?php echo $details['email'];?>" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
            <div class="form-group">
-            <input name="name" type="hidden" class="form-control" value="<?php echo $details['name'];?>" placeholder="Enter name">
+            <input name="name" type="hidden" class="form-control" value="<?php echo $details['name'];?>">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
+            <label>Password</label>
             <input name="password" type="password" class="form-control" value="<?php echo $details['password'];?>" placeholder="Password">
           </div>
           <div class="form-group">
-            <label for="exampleTextarea">About yourself</label>
+            <label>About yourself</label>
             <textarea name="about_me" class="form-control" id="exampleTextarea" rows="5"><?php echo $details['about_me'];?></textarea>
           </div>
           <div class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <input name="file" type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+            <label>File input</label>
+            <input name="file" type="file" class="form-control-file" id="exampleInputFile">
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>

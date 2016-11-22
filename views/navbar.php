@@ -1,50 +1,36 @@
-<style type="text/css">
-      .login-btns {
-        margin-top: 10px;
-      }
-
-      .logo {
-        float: left;
-        width: 50px;
-      }
-
-      .navbar-brand {
-        padding: 0px;
-        margin-right: 20px; 
-      }
-
-      .logo_text {
-        line-height: 50px;
-      }
-</style>
 
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="row">
-		<div class="container">  
-  		<div class="navbar-header">
+    <div class="container">  
+      <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
- 			  <a class="navbar-brand" href="home_page.php">
- 			   		<img alt="logo" class="logo" src="../images/logo.png" />
- 			   		<span class="logo_text"> CONNECT </span>
- 			  </a>
-  		</div>
-  		<div id="navbar" class="navbar-collapse collapse">
-    		<ul class="nav navbar-nav">
-     			<li class="header_url"><a href="./ask_question.php">
+        <a id="logo_div" class="navbar-brand" href="home_page.php">
+            <img alt="logo" class="logo" src="../images/logo.png" />
+            <span class="logo_text"> CONNECT </span>
+        </a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li id="ask_question" class="header_url"><a href="./ask_question.php">
             <i class="fa fa-question-circle-o fa-lg" aria-hidden="true"></i>
             &nbsp;Ask Question
           </a></li>
-      		<li class="header_url"><a href="./display_stats.php">
+          <li id="statistics" class="header_url"><a href="./display_stats.php">
             <i class="fa fa-bar-chart" aria-hidden="true"></i>
             &nbsp;Statistics
              </a>
           </li>
-      	</ul>
+          <li id="faqs" class="header_url"><a href="./faqs.php">
+            <i class="fa fa-exclamation" aria-hidden="true"></i>
+            &nbsp;FAQ's
+             </a>
+          </li>
+        </ul>
 
 
         <div class="col-sm-3 col-md-4">
@@ -52,7 +38,7 @@
               <form action="./home_page.php" method="get" class="navbar-form" role="search">
                 <div class="input-group">
                   <div class="input-group-btn" >
-                      <div class="btn-group"> 
+                      <div class="btn-group" id="search_option"> 
                           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                               <span data-bind="label" id="searchLabel">
                                   <i class="fa fa-tags" aria-hidden="true"></i>
@@ -73,46 +59,44 @@
               </form>
            </div>
         </div>
-    		
-        <ul class="nav navbar-nav navbar-right login-btns">
-          <?php if(!isset($_SESSION['user_id'])) { ?>
-    			<li>
-            <a href="./login_view.php">
-              <button class="btn btn-primary">
-      			  	<i class="fa fa-sign-in" aria-hidden="true"></i>
-      			  	LOG IN 
-      			  </button>
-            </a>
-          </li>
-          <?php } else {   
-            $image_url = "../images/profile_pictures/".$USERNAME;
-            if(!file_exists($image_url)) {
-              $image_url = "../images/profile_icon.png";
-            }
-            ?>
-            <span style="margin-right:25px;">
-              <a href="./profile_page.php?name=<?php echo $USERNAME; ?>">
-                <img width="35" height="35" src = "<?php echo $image_url;?>" />
-                <?php echo $USERNAME; ?>
+      
+
+        
+        <ul id="login" class="nav navbar-nav navbar-right login-btns">
+          <li>
+            <span>
+              <?php if(!isset($_SESSION['user_id'])) { ?>
+              <a href="./login_view.php" class="btn btn-primary">
+                  <i class="fa fa-sign-in" aria-hidden="true"></i>
+                  LOG IN 
               </a>
+              <?php } else {   
+                $image_url = "../images/profile_pictures/".$USERNAME;
+                if(!file_exists($image_url)) {
+                  $image_url = "../images/profile_icon.png";
+                }
+                ?>
+                <a style="margin-right:25px;" href="./profile_page.php?name=<?php echo $USERNAME; ?>">
+                  <img alt="profile_pic" width="35" height="35" src = "<?php echo $image_url;?>" />
+                  <?php echo $USERNAME; ?>
+                </a>
+                <a href="../actions/logout.php" class="btn btn-danger">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    LOG OUT
+                </a>
+              <?php }?>
             </span>
-            <a href="../actions/logout.php">
-              <button class="btn btn-danger">
-                <i class="fa fa-sign-out" aria-hidden="true"></i>
-                LOG OUT
-              </button>
-            </a>
-          <?php }?>
-    		</ul>
- 		 </div><!--/.nav-collapse -->
-		</div>
+          </li>
+        </ul>
+     </div><!--/.nav-collapse -->
+    </div>
   </div>
   <?php if($_SESSION['admin'] == 1) { ?>
   <div class="row" style="padding:5px;">
     <div class="container">
-      <a href="admin_view_questions.php"><button class="btn btn-info"><i class="fa fa-question" aria-hidden="true"></i>
-Questions Panel</button></a>
-      <a href="admin_view_users.php"><button class="btn btn-warning"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Users Panel</button></a>
+      <a href="admin_view_questions.php" class="btn btn-info"><i class="fa fa-question" aria-hidden="true"></i>
+Questions Panel</a>
+      <a href="admin_view_users.php" class="btn btn-warning"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Users Panel</a>
     </div>
   </div>
   <?php } ?>
