@@ -104,7 +104,7 @@ $(document).ready(function() {
 
 	$(".answer_submit").click(function(e) {
 
-		var result = check_length($('#text_editor'), 30, "Answer must be atleast 30 characters");
+		var result = check_length($('#text_editor'), 30, "Answer must be atleast 30 characters", true);
 		if(result) {
 			e.preventDefault();
 			$.post('../actions/insert/insert_answer.php', {'ques_id': ques_id, 'answer': $('#text_editor').val()}, function(response) {

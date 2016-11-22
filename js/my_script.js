@@ -18,7 +18,7 @@ function check_email(email) {
  * @param      {string}   string  The string
  * @return     {boolean}  
  */
-function check_length(_this, length, string) {
+function check_length(_this, length, string, before=false) {
 
 	var value = $(_this).val();
     if(value.length >= length) {
@@ -28,9 +28,17 @@ function check_length(_this, length, string) {
         return true;
     }
     
-    if(_this.siblings('.text-danger').length == 0) {
+    if(_this.siblings('.text-danger').length == 0 && before == false) {
     	_this.parent().after('<p style="margin-top:5px;" class="text-danger">' + string+ '</p>');
         _this.parent().next().fadeOut(1500);
+    }
+    else if(_this.siblings('.text-danger').length == 0 && before != false )
+    {
+        _this.parent().prepend('<p style="margin-top:5px;" class="text-danger">' + string+ '</p>');
+        _this.siblings(':first').show().fadeOut(1500);
+    }
+    else {
+        _this.siblings('.text-danger').show().fadeOut(1500);
     }
 
     return false;
@@ -67,5 +75,7 @@ function get_current_date() {
     return day +'-'+monthNames[monthIndex]+'-'+year;
 
 }
+
+
 
 var labels = ['warning', 'danger', 'info', 'primary', 'success', 'default'];
