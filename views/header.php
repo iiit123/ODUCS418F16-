@@ -2,8 +2,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<title>%TITLE%</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Istok+Web" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdn.rawgit.com/sorich87/bootstrap-tour/master/build/css/bootstrap-tour.min.css">
 
 		<style type="text/css">
 			body{
@@ -67,8 +69,23 @@
 			.no-padding-left{
 				padding-left: 0px;
 			}
+			.login-btns {
+			  margin-top: 10px;
+			}
 
+			.logo {
+			  float: left;
+			  width: 50px;
+			}
 
+			.navbar-brand {
+			  padding: 0px;
+			  margin-right: 20px; 
+			}
+
+			.logo_text {
+			  line-height: 50px;
+			}
 		</style>
 	</head>
 

@@ -2,7 +2,14 @@
 <?php include('../actions/get/get_individual_question.php');?>
 <?php include('../actions/update/update_views.php'); ?>
 <?php include('../actions/get/get_answers.php'); ?>
-<?php include('header.php'); ?>
+<?php 
+	ob_start();
+    include("header.php");
+    $buffer=ob_get_contents();
+    ob_end_clean();
+    $buffer=str_replace("%TITLE%","INDIVIDUAL PAGE",$buffer);
+    echo $buffer;
+?>
 <?php include('navbar.php'); ?>
 <?php 
 	if(!isset($_GET['page_number'])) {
@@ -14,8 +21,6 @@
 ?>
 
 <?php update_question_views($db, $_GET['ques_id']); ?>
-	    <title> INDIVIDUAL QUESTION PAGE </title>
-
 		<div class="main_container container">
 			<div class="row">
 				<h3> <?php echo $title;?>  </h3> <hr>
@@ -29,14 +34,14 @@
 						</div>
 						<div class="col-md-10 content">
 							<p style="display:none;" class="question_warning alert alert-warning message"></p>
-							<?php echo '<span class="content">'.$question.'</span>'; ?>	
+							<?php echo '<div class="content">'.$question.'</div>'; ?>	
 							<p>
 
 								<?php
 								if($tags!="") { 
 									foreach($tags as $key => $tag) {?>
 									<a class="no_underline" href="./home_page.php?tag=<?php echo $tag ?>">
-										<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span>
+										<span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo trim($tag);?></span>
 									</a>
 								<?php }
 								}?>
@@ -57,7 +62,7 @@
 				                    $image_url = "../images/profile_icon.png";
 				                  }
 				                ?>
-								<a href="./profile_page.php?name=<?php echo $name ;?>"> <img width="30" height="30" src="<?php echo $image_url;?>"/> <?php echo $name ;?></a> <i style="color:gold" class="fa fa-circle" aria-hidden="true"></i>
+								<a href="./profile_page.php?name=<?php echo $name ;?>"> <img alt="profile_pic" width="30" height="30" src="<?php echo $image_url;?>"/> <?php echo $name ;?></a> <i style="color:gold" class="fa fa-circle" aria-hidden="true"></i>
 <?php echo get_user_score($db, $asker_id);?>
 								<a style="margin-left:25px;" class="link pull-right" href="#"> report abuse </a>
 								<a class="edit link pull-right" href="#">edit </a> &nbsp;

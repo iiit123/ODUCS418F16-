@@ -12,7 +12,7 @@
 	$sql = "SELECT *, answers.created_at from answers INNER JOIN users ON answers.user_id=users.user_id where ques_id = '". $ques_id ."' ORDER BY is_correct DESC, likes_count DESC LIMIT ".(($page_number-1)*5).", 5";
 
 	$result = $db->query($sql);
-   
+   	$answers = [];
    	if($result->num_rows > 0) {
 		while($row = $result->fetch_array(MYSQLI_ASSOC)) {
 			$answers[] = $row;
@@ -20,7 +20,7 @@
 	}
 
     else {
-    	echo "Error: " . $sql . "<br>" . $db->error;
+    	unset($answers);
     }
 
 ?>

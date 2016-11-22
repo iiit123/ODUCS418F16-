@@ -1,5 +1,12 @@
 <?php include('../config.php'); ?>
-<?php include('header.php'); ?>
+<?php 
+	ob_start();
+    include("header.php");
+    $buffer=ob_get_contents();
+    ob_end_clean();
+    $buffer=str_replace("%TITLE%","HOME PAGE",$buffer);
+    echo $buffer;
+?>
 <?php include('navbar.php'); ?>
 <?php 
 	if(isset($_GET['tag'])) {
@@ -9,7 +16,6 @@
 		include('../actions/get/get_all_questions.php');
 	}
 ?>
-	    <title> HOME PAGE </title>
 		<div class="main_container container">
 			<div class="row">
 				<div class="col-md-8">
@@ -29,17 +35,17 @@
                     <?php if(isset($_GET['tag'])) { ?>
 						<h4> <?php echo $_GET['tag'];?> Questions  </h4> <hr/>
 					<?php } else { ?>
-						<h4> <span id="q_type_heading"> Top Questions </span>
-								<span class="dropdown pull-right">
-								  <button class="btn select_question_type btn-default dropdown-toggle" type="button" data-toggle="dropdown">Select type
+						<div class="pull-left"><h4> <span id="q_type_heading"> Top Questions </span></h4></div>
+								<div class="dropdown pull-right">
+								  <button id="select_ques_type" class="btn select_question_type btn-default dropdown-toggle" type="button" data-toggle="dropdown">Select type
 								  <span class="caret"></span></button>
 								  <ul class="dropdown-menu menu_questions_type">
-								  	<li><a id="All Questions" class="question_type" href="#">All Questions</a></li>
-								    <li><a id="Top Questions" class="question_type" href="#">Top Questions</a></li>
-								    <li><a id="Recent Questions" class="question_type" href="#">Recent Questions</a></li>
+								  	<li><a id="All_Questions" class="question_type" href="#">All Questions</a></li>
+								    <li><a id="Top_Questions" class="question_type" href="#">Top Questions</a></li>
+								    <li><a id="Recent_Questions" class="question_type" href="#">Recent Questions</a></li>
 								   </ul>
-								</span>
-						</h4>
+								</div>
+						<br/>
 						<hr/>
 					<?php } ?>
 					
@@ -102,6 +108,7 @@
 			$(document).ready(function () {
 
 				var type = decodeURIComponent($.trim(get_url_params('type')));
+				type.replace('_', ' ');
 
 				var current_page = parseInt(decodeURIComponent($.trim(get_url_params('page_number'))));
 				if(!current_page) {
@@ -118,10 +125,10 @@
 						i=0;
 						for(i=current_page-1;i<current_page + 2, i<questions_count/5; i++) {
 							if(i+1 == current_page) {
-								pagination_col += '<li id="page_number_'+(i+1)+'" class="active pagination_number"><a href="./home_page?type=All Questions&page_number='+ (i+1) +'">'+ (i+1) +'</a></li>';
+								pagination_col += '<li id="page_number_'+(i+1)+'" class="active pagination_number"><a href="./home_page.php?type=All Questions&page_number='+ (i+1) +'">'+ (i+1) +'</a></li>';
 							}
 							else {
-								pagination_col += '<li id="page_number_'+(i+1)+'" class="pagination_number"><a href="./home_page?type=All Questions&page_number='+ (i+1) +'">'+ (i+1) +'</a></li>';
+								pagination_col += '<li id="page_number_'+(i+1)+'" class="pagination_number"><a href="./home_page.php?type=All Questions&page_number='+ (i+1) +'">'+ (i+1) +'</a></li>';
 							}
 						}
 						var pagination_col_before = '<div class="col-md-6 col-md-offset-4"><ul class="pagination">'
@@ -130,7 +137,7 @@
 
 						}
 						else {
-							pagination_col_before += '<li class="previous"><a href="./home_page?type=All Questions&page_number='+ eval(current_page-1) +'">Previous</a></li>';
+							pagination_col_before += '<li class="previous"><a href="./home_page.php?type=All Questions&page_number='+ eval(current_page-1) +'">Previous</a></li>';
 						}
 						var pagination_col_after = "";
 						if(current_page >= questions_count/5){
@@ -138,7 +145,7 @@
 
 						}
 						else {
-							pagination_col_after += '<li class="next"><a href="./home_page?type=All Questions&page_number='+ eval(current_page+1) +'">Next</a></li></ul></div>';
+							pagination_col_after += '<li class="next"><a href="./home_page.php?type=All Questions&page_number='+ eval(current_page+1) +'">Next</a></li></ul></div>';
 
 						}
 						pagination_col = pagination_col_before + pagination_col + pagination_col_after;
