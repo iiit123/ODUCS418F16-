@@ -1,6 +1,6 @@
 <?php include('../config.php'); ?>
 <?php 
-	if(isset($_SESSION['admin']) != 1){
+	if($_SESSION['admin'] != 1){
         header('location:page_not_found.php');
     }
 ?> 
