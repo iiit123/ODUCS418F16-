@@ -3,7 +3,7 @@
 		$code = $_GET['code'];
         $post = http_build_query(array(
             'client_id' => CLIENT_ID,
-            'redirect_url' => 'localhost/project/views/home_page.php',
+            'redirect_url' => 'http://iiit123.cs518.cs.odu.edu/views/home_page.php',
             'client_secret' => CLIENT_SECRET,
             'code' => $code,
         ));

@@ -90,11 +90,7 @@
 							<i class="fa fa-film" aria-hidden="true"></i>
   							Embed our IFrame
   						</div>
-  						<input id="iframe_code" type="hidden" value='<iframe id="iframe" seamless wmode="transparent" 
-  							   src="<?php echo $_SERVER[`DOCUMENT_ROOT`];?>/embed.php" 
-  							   frameborder="0" 
-  							   id="iframe" 
-  							   style="width: 100%; height: 100%; top: 0; bottom: 0;"></iframe>' />
+  						<input id="iframe_code" type="hidden" value='<iframe id="iframe" seamless wmode="transparent" src="http://iiit123.cs518.cs.odu.edu/embed.php" frameborder="0" id="iframe" style="width: 100%; height: 100%; top: 0; bottom: 0;"></iframe>' />
   						
   						<button onclick="copyToClipboard('#iframe_code'); $(this).html('copied') " class="btn btn-default form-control"> 
   							<i class="fa fa-clipboard" aria-hidden="true"></i>
@@ -104,7 +100,7 @@
   							<iframe id='iframe'
   							   seamless 
   							   wmode="transparent" 
-  							   src="embed.php" 
+  							   src="http://iiit123.cs518.cs.odu.edu/views/embed.php" 
   							   frameborder="0" 
   							   id="iframe" 
   							   style="width: 100%; height: 100%; top: 0; bottom: 0;"></iframe>
