@@ -30,7 +30,7 @@
 					<div style="margin-bottom:30px;" class="row">
 						<div class="col-md-3 col-sm-1">
 							<?php foreach($tags as $key => $tag) {?>
-								<a class="no_underline" href="./home_page.php?tag=<?php echo trim($tag); ?>"><span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span></a>
+								<a target="_blank" class="no_underline" href="./home_page.php?tag=<?php echo trim($tag); ?>"><span class="pointer label label-<?php echo $labels[$key%6];?>"><?php echo $tag ?></span></a>
 							<?php }?>
 						</div>
 					</div>
