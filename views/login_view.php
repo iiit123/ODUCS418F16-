@@ -56,7 +56,13 @@
                             echo '<div class="alert alert-danger">
                                     Invaid username or password !
                                 </div>';
-                        }?>
+                            }
+                            else if(isset($_GET['error_captcha'])) {
+                                echo '<div class="alert alert-danger">
+                                        Invaid captcha. Please try again !
+                                    </div>';
+                            }
+                        ?>
 
                                     
                             <div class="input-group">
@@ -68,6 +74,9 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                 <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required>
+                            </div>
+                            <div class="input-group">
+                                <div class="g-recaptcha" data-sitekey="6Le5Jw0UAAAAAHsHw55OtjKIdJJARfuyUbJeWnLD"></div>
                             </div>
                             <p id="login_password_error" style="display:none;" class="text-danger">Password length should be more than 5 </p>        
 
@@ -83,7 +92,13 @@
                                 </div>    
                         </div> 
                         <div class="panel-footer">
-                            <button id="btn-login" class="btn btn-primary"> <i class="fa fa-sign-in"></i>  &nbsp; Login  </button>
+                            <button type="submit" id="btn-login" class="btn btn-primary"> <i class="fa fa-sign-in"></i>  &nbsp; Login  </button>
+                            <a class="pull-right" href="https://github.com/login/oauth/authorize?scope=user:email&client_id=<?php echo CLIENT_ID;?>" title="Login with Github">
+                                <button type="button" class="btn btn-info">
+                                    <i class="fa fa-github-alt" aria-hidden="true"></i>
+                                    Login with github.
+                                </button>
+                            </a>
                         </div>
                     </div>  
             </form>     
@@ -123,14 +138,16 @@
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input id="signup-password" type="password" class="form-control" name="password" placeholder="password" required/>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <div class="col-md-4">
-                                        <button id="btn-signup" name="signup" type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> &nbsp; Sign Up</button>
-                                    </div>
-                                </div>
-                            </form>
                          </div>
+                        <div class="panel-footer">
+                            <button id="btn-signup" name="signup" type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> &nbsp; Sign Up</button>
+                            <a class="pull-right" href="https://github.com/login/oauth/authorize?scope=user:email&client_id=<?php echo CLIENT_ID;?>" title="Login with Github">
+                                <button type="button" class="btn btn-info">
+                                    <i class="fa fa-github-alt" aria-hidden="true"></i>
+                                    Login with github.
+                                </button>
+                            </a>
+                        </div>
                     </div>        
                 </div> 
             </form>
@@ -158,7 +175,7 @@
 
                     $('#loginbox').slideDown(timer);
 
-                    $('.alert').fadeOut(1500);
+                    $('.alert').fadeOut(2000);
 
                     $('#login_email_error').hide();
                     $('#login_password_error').hide();

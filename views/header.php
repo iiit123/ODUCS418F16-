@@ -4,8 +4,10 @@
 		<meta charset="UTF-8">
 		<title>%TITLE%</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Istok+Web" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.rawgit.com/sorich87/bootstrap-tour/master/build/css/bootstrap-tour.min.css">
+		<script src='https://www.google.com/recaptcha/api.js'></script>
 
 		<style type="text/css">
 			body{

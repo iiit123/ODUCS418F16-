@@ -4,15 +4,21 @@
 
 	date_default_timezone_set('America/New_York');
 	
+
+  define('CLIENT_ID', '7904d43058fd2e4ae4dd');
+  define('CLIENT_SECRET', '2d1f9709f5aafe3d6a315e18eb99bcf9dd08da5a');
+  define('APP_NAME', 'connect');
+
+
 	define('DB_SERVER', 'localhost');
  	define('DB_USERNAME', 'admin');
  	define('DB_PASSWORD', 'M0n@rch$');
  	define('DB_DATABASE', 'milestone3dump');
+  define('CAPTCHA_SECRET_KEY', '6Le5Jw0UAAAAAMQsBMdJjkSUD6ysA8FY4O-DbZsc');
  	$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-
 	session_start();
 
-	if(isset($_SESSION['user_id'])){
+  if(isset($_SESSION['user_id'])){
 		$USER_ID = $_SESSION['user_id'];
     $USERNAME = $_SESSION['name'];
 	}
@@ -70,6 +76,63 @@
     return $new_data_array;
   }
 
+  function get_user_email($db, $name) {
+    $sql = "SELECT email FROM users WHERE name like '$name'";
+    $result = $db->query($sql);
+    if($result->num_rows > 0) {
+      $row = $result->fetch_array(MYSQLI_ASSOC);
+      $email = $row['email'];
+      return $email;
+    }
+    else {
+      return null;
+    }
+  }
+
+  function get_github_image_url($db, $name) {
+    $sql = "SELECT github_image_url FROM users WHERE name like '$name'";
+    $result = $db->query($sql);
+    if($result->num_rows > 0) {
+      $row = $result->fetch_array(MYSQLI_ASSOC);
+      $image_url = $row['github_image_url'];
+      return $image_url;
+    }
+    else {
+      return false;
+    }
+  }
+
+  function get_image_url($db, $name) {
+
+    $github_image_url = get_github_image_url($db, $name);
+
+    if($github_image_url) {
+      return $github_image_url;
+    }
+
+    $image_url = "../images/profile_pictures/".$name;
+    $default_url = "../images/profile_icon.png";
+    if(!file_exists($image_url)) {
+      $email = get_user_email($db, $name);
+      if($email != "") {
+        $hashed_email = md5($email);
+        $gravatar_url = "https://www.gravatar.com/avatar/".$hashed_email;
+        $gravcheck = "http://www.gravatar.com/avatar/".$hashed_email."?d=404";
+        $response = get_headers($gravcheck);
+        if ($response[0] != "HTTP/1.1 404 Not Found"){
+            return $gravatar_url;
+        }
+        else {
+          return $default_url;
+        }  
+      }
+      else {
+        return $default_url;
+      }      
+    }
+    return $image_url;
+  }
+
   function get_user_id($db, $name) {
     $sql = "SELECT user_id FROM users WHERE name like '$name'";
     $result = $db->query($sql);
@@ -112,19 +175,6 @@
     }
     else{
       return 0;
-    }
-  }
-
-  function get_user_email($db, $name) {
-    $sql = "SELECT email FROM users WHERE name like '$name'";
-    $result = $db->query($sql);
-    if($result->num_rows > 0) {
-      $row = $result->fetch_array(MYSQLI_ASSOC);
-      $email = $row['email'];
-      return $email;
-    }
-    else {
-      return null;
     }
   }
 

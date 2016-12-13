@@ -76,6 +76,15 @@ function get_current_date() {
 
 }
 
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).val()).select();
+  document.execCommand("copy");
+  $temp.remove();
+  $(this).text('copied!');
+}
+
 
 
 var labels = ['warning', 'danger', 'info', 'primary', 'success', 'default'];

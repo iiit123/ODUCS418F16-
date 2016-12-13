@@ -77,7 +77,7 @@
                 }
                 ?>
                 <a style="margin-right:25px;" href="./profile_page.php?name=<?php echo $USERNAME; ?>">
-                  <img alt="profile_pic" width="35" height="35" src = "<?php echo $image_url;?>" />
+                  <img alt="profile_pic" width="35" height="35" src = "<?php echo get_image_url($db, $USERNAME);?>" />
                   <?php echo $USERNAME; ?>
                 </a>
                 <a href="../actions/logout.php" class="btn btn-danger">

@@ -56,13 +56,7 @@
 							</p>
 							<br/>
 							<p>
-								<?php 
-								 $image_url = "../images/profile_pictures/".$name;
-				                  if(!file_exists($image_url)) {
-				                    $image_url = "../images/profile_icon.png";
-				                  }
-				                ?>
-								<a href="./profile_page.php?name=<?php echo $name ;?>"> <img alt="profile_pic" width="30" height="30" src="<?php echo $image_url;?>"/> <?php echo $name ;?></a> <i style="color:gold" class="fa fa-circle" aria-hidden="true"></i>
+								<a href="./profile_page.php?name=<?php echo $name ;?>"> <img alt="profile_pic" width="30" height="30" src="<?php echo get_image_url($db, $name);?>"/> <?php echo $name ;?></a> <i style="color:gold" class="fa fa-circle" aria-hidden="true"></i>
 <?php echo get_user_score($db, $asker_id);?>
 								<a style="margin-left:25px;" class="link pull-right" href="#"> report abuse </a>
 								<a class="edit link pull-right" href="#">edit </a> &nbsp;
@@ -79,7 +73,7 @@
 							<h4> <span id="ans_count"><?php echo $answers_count ;?></span> Answers  </h4> 
 						<?php }?>
 
-						<?php if($answers_count != 0) { 
+						<?php if(isset($answers)) { 
 							foreach($answers as $key => $answer) {?>
 						<hr/>
 						<div class="row">
@@ -102,14 +96,8 @@
 								<p style="display:none;" class="alert alert-warning message"></p>
                             	<p><?php echo decode_data($answer['answer']); ?></p>
 								<p>
-									<?php 
-										$image_url = "../images/profile_pictures/".$answer['name'];
-						                if(!file_exists($image_url)) {
-						                   $image_url = "../images/profile_icon.png";
-						                }
-					                ?>
 									<span>
-										<a href="./profile_page.php?name=<?php echo $answer['name'];?>"> <img width="30" height="30" src="<?php echo $image_url;?>"/> <?php echo $answer['name'] ;?> </a><i style="color:gold" class="fa fa-circle" aria-hidden="true"></i>
+										<a href="./profile_page.php?name=<?php echo $answer['name'];?>"> <img width="30" height="30" src="<?php echo get_image_url($db, $answer['name']);?>"/> <?php echo $answer['name'] ;?> </a><i style="color:gold" class="fa fa-circle" aria-hidden="true"></i>
 <?php echo get_user_score($db, $answer['user_id']);?>
 									</span>
 									<span class="pull-right">

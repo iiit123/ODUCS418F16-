@@ -4,13 +4,7 @@
 <div class="row">
     <div class="col-md-2 text-center">
       <div class="panel panel-default">
-        <?php 
-        $image_url = "../images/profile_pictures/".$_GET['name'];
-        if(!file_exists($image_url)) {
-          $image_url = "../images/profile_icon.png";
-        } ?>
-
-        <div class="panel-body"><img alt="user_profile_pic" style="width:100%;" src="<?php echo $image_url;?>"/></div>
+        <div class="panel-body"><img alt="user_profile_pic" style="width:100%;" src="<?php echo get_image_url($db, $_GET['name']);?>"/></div>
         <div class="panel-footer">
           <?php echo $_GET['name']; ?>
         </div>

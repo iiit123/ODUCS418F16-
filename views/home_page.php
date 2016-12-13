@@ -87,16 +87,27 @@
 				<div class="col-md-3 col-md-offset-1" style="margin-top:10px;">
 					<div class="panel panel-default">
   						<div class="panel-heading">
-  							<i class="fa fa-line-chart" aria-hidden="true"></i>
-  							Trending Tags <span style="margin-left:10px;" class="pointer label label-info">Next Update</span>
+							<i class="fa fa-film" aria-hidden="true"></i>
+  							Embed our IFrame
   						</div>
+  						<input id="iframe_code" type="hidden" value='<iframe id="iframe" seamless wmode="transparent" 
+  							   src="<?php echo $_SERVER[`DOCUMENT_ROOT`];?>/embed.php" 
+  							   frameborder="0" 
+  							   id="iframe" 
+  							   style="width: 100%; height: 100%; top: 0; bottom: 0;"></iframe>' />
+  						
+  						<button onclick="copyToClipboard('#iframe_code'); $(this).html('copied') " class="btn btn-default form-control"> 
+  							<i class="fa fa-clipboard" aria-hidden="true"></i>
+							Copy the code 
+						</button>
   						<div class="panel-body">
-  							<ul class="list-group">
-  								<li class="list-group-item">
-  									<span class="badge">5</span>
-    									Javascript
-  								</li>
-  							</ul>
+  							<iframe id='iframe'
+  							   seamless 
+  							   wmode="transparent" 
+  							   src="embed.php" 
+  							   frameborder="0" 
+  							   id="iframe" 
+  							   style="width: 100%; height: 100%; top: 0; bottom: 0;"></iframe>
   						</div>
 					</div>
 				</div>

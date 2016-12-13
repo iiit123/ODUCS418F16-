@@ -1,5 +1,12 @@
 <?php include('../config.php'); ?>
-<?php include('header.php'); ?>
+<?php 
+	ob_start();
+    include("header.php");
+    $buffer=ob_get_contents();
+    ob_end_clean();
+    $buffer=str_replace("%TITLE%","STATISTICS PAGE",$buffer);
+    echo $buffer;
+?>
 <?php include('navbar.php'); ?>
 <div class="main_container container">
 	<div class="row">
