@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 13, 2016 at 02:55 PM
+-- Generation Time: Dec 13, 2016 at 03:00 PM
 -- Server version: 5.7.13
 -- PHP Version: 5.5.36
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `milestone4dump`
 --
+CREATE DATABASE IF NOT EXISTS `milestone4dump` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `milestone4dump`;
 
 -- --------------------------------------------------------
 
@@ -26,7 +28,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `answers`
 --
 
-DROP TABLE IF EXISTS `answers`;
 CREATE TABLE `answers` (
   `ans_id` int(11) NOT NULL,
   `answer` longtext NOT NULL,
@@ -55,7 +56,6 @@ INSERT INTO `answers` (`ans_id`, `answer`, `ques_id`, `user_id`, `likes_count`, 
 -- Table structure for table `likes`
 --
 
-DROP TABLE IF EXISTS `likes`;
 CREATE TABLE `likes` (
   `like_id` int(11) NOT NULL,
   `ques_id` int(11) DEFAULT NULL,
@@ -81,7 +81,6 @@ INSERT INTO `likes` (`like_id`, `ques_id`, `ans_id`, `user_id`, `like_flag`, `st
 -- Table structure for table `notifications`
 --
 
-DROP TABLE IF EXISTS `notifications`;
 CREATE TABLE `notifications` (
   `notification_id` int(11) NOT NULL,
   `vote_type` enum('upvote','downvote','right_ans') NOT NULL,
@@ -100,7 +99,6 @@ CREATE TABLE `notifications` (
 -- Table structure for table `questions`
 --
 
-DROP TABLE IF EXISTS `questions`;
 CREATE TABLE `questions` (
   `ques_id` int(11) NOT NULL,
   `title` longtext NOT NULL,
@@ -135,7 +133,6 @@ INSERT INTO `questions` (`ques_id`, `title`, `question`, `tags`, `views`, `user_
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
