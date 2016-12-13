@@ -13,7 +13,7 @@
 	define('DB_SERVER', 'localhost');
  	define('DB_USERNAME', 'admin');
  	define('DB_PASSWORD', 'M0n@rch$');
- 	define('DB_DATABASE', 'milestone3dump');
+ 	define('DB_DATABASE', 'milestone4dump');
   define('CAPTCHA_SECRET_KEY', '6Le5Jw0UAAAAAMQsBMdJjkSUD6ysA8FY4O-DbZsc');
  	$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 	session_start();
