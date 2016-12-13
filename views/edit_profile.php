@@ -4,11 +4,19 @@
 <div class="row">
     <div class="col-md-2 text-center">
       <div class="panel panel-default">
-        <div class="panel-body"><img alt="user_profile_pic" style="width:100%;" src="<?php echo get_image_url($db, $_GET['name']);?>"/></div>
+        <div class="panel-body"><img alt="user_profile_pic" class="user_profile_pic" style="width:100%;" src="<?php echo get_image_url($db, $_GET['name']);?>"/></div>
         <div class="panel-footer">
           <?php echo $_GET['name']; ?>
         </div>
       </div>
+      <a href="../actions/delete/delete_pic.php">
+        <button class="btn btn-danger">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          Delete your image
+        </button>
+      </a> 
+      <br/> <br/>
+      <div class="delete_pic_msg alert alert-warning hide">Image has been deleted</div>
     </div>
     <div class="col-md-6">
       <?php if(isset($_SESSION['upload_message'])) {?> 

@@ -69,7 +69,6 @@ $(document).ready(function() {
 
 	$.get('../actions/get/get_like_details.php', {'ques_id': ques_id}, function(response) {
 
-		console.log(response)
 		$.each(response, function(index, value){
 
 			if(value['ans_id']==null) {
